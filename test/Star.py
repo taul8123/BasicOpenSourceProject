@@ -7,4 +7,3 @@ class Star(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()               #이미지의 사각형에 해당하는 범위를 가져옴
         self.rect.center = location                     #위치설정
         self.mask = pygame.mask.from_surface(self.image)#충돌감지를 위한 마크생성
-        self.rect
