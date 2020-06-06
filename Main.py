@@ -8,7 +8,7 @@ mainClock = pygame.time.Clock()
 
 # Load Config.cfg
 configParser = configparser.RawConfigParser()
-configFilePath = os.path.join(os.path.dirname(__file__), 'game/Setting.cfg')
+configFilePath = os.path.join(os.path.dirname(__file__), 'game/data/Setting.cfg')
 configParser.read(configFilePath)
 FullToggle = configParser.get("Setting", "Fullscreen_Toggle")
 SoundFX = configParser.get("Setting", "Sound_Fx")
@@ -17,6 +17,7 @@ ScoreToggle = configParser.get("Setting", "Display_Score")
 
 # Pygame Initialize
 pygame.init()
+pygame.mixer.init()
 pygame.display.set_caption('BOUNCY DUNGEON')
 width, height = 1920, 1080
 if FullToggle == "True":
@@ -33,7 +34,7 @@ Setting_Button = pygame.image.load("game/image/Setting.png")
 Exit_Button = pygame.image.load("game/image/Exit.png")
 Gray_Background = pygame.image.load("game/image/Gray Background.png")
 Score_Board = pygame.image.load("game/image/Score_Board.png")
-
+Click_Sound = pygame.mixer.Sound("game/audio/click.wav")
 
 class button():
     def __init__(self, x, y, width, height):
@@ -57,6 +58,8 @@ exit_button = button(1300, 880, 481, 110)
 
 # Here is Main
 def Start_Menu():
+    pygame.mixer.music.load('game/audio/Main-bgm.mp3')
+    pygame.mixer.music.play(-1)
     while True:
         screen.blit(Start_background, (0, 0))
         screen.blit(Setting_Button, (1770, 20))
@@ -66,22 +69,29 @@ def Start_Menu():
         screen.blit(Exit_Button, (1300, 880))
         for event in pygame.event.get():
             pos = pygame.mouse.get_pos()
-
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if s_button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    pygame.mixer.music.pause()
+                    Game_Menu()
+                    pygame.mixer.music.unpause()
+                if setting_button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    Setting_Menu()
+                if score_button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    Score_Menu()
+                if help_button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    Help_Menu()
+                if exit_button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    pygame.time.wait(100)
+                    pygame.quit()
+                    sys.exit()
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == pygame.MOUSEBUTTONDOWN:
-                if s_button.isOver(pos):
-                    Game_Menu()
-                if setting_button.isOver(pos):
-                    Setting_Menu()
-                if score_button.isOver(pos):
-                    Score_Menu()
-                if help_button.isOver(pos):
-                    Help_Menu()
-                if exit_button.isOver(pos):
-                    pygame.quit()
-                    sys.exit()
         pygame.display.flip()
 
 
@@ -109,7 +119,7 @@ def Score_Menu():
     textheight = height // 2 - 160
     textwidth = width // 2 - 250
     while running:
-        f = open('game/rank.txt', 'r')
+        f = open('game/data/rank.txt', 'r')
         textheight = height / 2 - 160
         textwidth = width / 2 - 250
         while True:
@@ -118,7 +128,7 @@ def Score_Menu():
                 break
             name, score = line.split(' ')
             text = name + "                                       " + score
-            textfont = pygame.font.Font('game/NanumGothic.ttf', 40)
+            textfont = pygame.font.Font('game/data/NanumGothic.ttf', 40)
             text = textfont.render(text, True, (0, 0, 0))
             textpos = text.get_rect()
             textheight += 45
