@@ -8,9 +8,10 @@ class Fakewall(Wall.Wall):      #Wall상속
         self.frame_counter=0                            #1이상일 경우 사라져 있음
         self.disappear_time = time                      #사라져있을시간
 
-    def disappear(self):
+    def disappear(self,ball):
         '''사라지게함'''
-        self.frame_counter=self.FPS*self.disappear_time
+        if self.rect.top >= ball.get_center(1) - ball.get_speed(1):
+            self.frame_counter=self.FPS*self.disappear_time
 
     def isnotdisappear(self):
         '''출력전에 이것을 체크하고 반환된 값이 1일경우 출력 0일경우 출력 안해야함'''

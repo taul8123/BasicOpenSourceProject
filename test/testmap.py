@@ -7,7 +7,10 @@ import Fakewall
 import Spring
 
 import time
+import Map
+import Movewall
 img=['wall','star','setting','Exit']#이미지 이름
+
 
 def map(screen):#스크린을 전달받음
     done = 1
@@ -18,6 +21,8 @@ def map(screen):#스크린을 전달받음
     fakewall_list=pygame.sprite.Group()          #fakewall들을 모아둘 그룹
     fakewall_disappear_list=pygame.sprite.Group()#사라진 fakewall들을 모아둘 그룹
     spring_list=pygame.sprite.Group()
+    movewall_list=pygame.sprite.Group()
+
 
     background= pygame.Surface(screen.get_size())#스크린과 동일크기의 surface생성 이곳에 그린후 스크린에 복사
     clock=pygame.time.Clock()                    #프레임 설정시 사용
@@ -39,6 +44,9 @@ def map(screen):#스크린을 전달받음
 
     fakewall_list.add(Fakewall.Fakewall(image_list[0], (500, 900), (30, 30),FPS))
     spring_list.add(Spring.Spring(image_list[3],(550,900),(30,30)))
+    movewall_list.add(Movewall.Movewall(image_list[0],(550,800),(30,30),(100,100),FPS))
+
+
 
     while done:
         clock.tick(FPS)     #프레임 설정
@@ -70,7 +78,7 @@ def map(screen):#스크린을 전달받음
         collision_list =pygame.sprite.spritecollide(ball,fakewall_list,True,pygame.sprite.collide_mask)
         for fake in collision_list:
             fake.collision(ball)
-            fake.disappear()
+            fake.disappear(ball)
             fakewall_disappear_list.add(fake)
         #fakewall 재생성 확인
         for fake in fakewall_disappear_list:
@@ -81,6 +89,14 @@ def map(screen):#스크린을 전달받음
         collision_list=pygame.sprite.spritecollide(ball,spring_list,False,pygame.sprite.collide_mask)
         for spring in collision_list:
             spring.spring(ball)
+
+        # 이동체크
+        for movewall in movewall_list:
+            movewall.Move()
+        collision_list = pygame.sprite.spritecollide(ball, movewall_list, False, pygame.sprite.collide_mask)
+        for movewall in collision_list:
+            movewall.collision(ball)
+
         #공이동
         ball.move_check(key)
 
@@ -95,6 +111,7 @@ def map(screen):#스크린을 전달받음
         wall_list.draw(background)
         fakewall_list.draw(background)
         spring_list.draw(background)
+        movewall_list.draw(background)
         #스크린에 그리고 새로고침
         screen.blit(background,(0,0))
         pygame.display.flip()

@@ -37,6 +37,8 @@ class Ball(pygame.sprite.Sprite):
         y+=self.speed[1]
         self.rect.center=(x,y)      #좌표값변경
 
+
+
     def move_x(self,a):
         '''x를 이동 a는 가속도(속도 최대 값 있음)'''
         #x는 공기준으로 오른쪽이 + 왼쪽이 -
@@ -80,7 +82,46 @@ class Ball(pygame.sprite.Sprite):
 
         self.move_y()
 
+    def speed_set_y(self,s):
+        '''y축 속도 변경'''
+        self.speed[1]=s
 
+    def speed_set_x(self,s):
+        '''x축 속도 변경'''
+        self.speed[0]=s
 
+    def get_speed_x(self):
+        '''y의 속도를 받아옴'''
+        return self.speed[0]
+
+    def get_speed_y(self):
+        '''y의 속도를 받아옴'''
+        return self.speed[1]
+
+    def get_speed(self,index=2):
+        '''speed를 반환 인자로 0을 넣으면 x의 속도가 1을 넣으면 y의 속도가 반환 됨'''
+        try:
+            return self.speed[index]
+        except IndexError:
+            return self.speed
+
+    def set_dontchangespeed(self,num):
+        '''몇프레임 동안 못움직이게 하는지 체크하는 변수의 값변경'''
+        self.dontchangespeed=num
+
+    def reverse_speed_x(self):
+        '''x축의 속도를 뒤집음(즉, 방향을 바꿈)'''
+        self.speed[0]=-self.speed[0]
+
+    def reverse_speed_y(self):
+        '''y축의 속도를 뒤집음(즉, 방향을 바꿈)'''
+        self.speed[1]=-self.speed[1]
+
+    def get_center(self,index=2):
+        '''rect.center를 반환 인자로 0을 넣으면 x좌표가 1을 넣으면 y좌표가 반환 됨'''
+        try:
+            return self.rect.center[index]
+        except IndexError:
+            return self.rect.center
 
 
