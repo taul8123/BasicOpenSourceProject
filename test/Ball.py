@@ -22,7 +22,7 @@ class Ball(pygame.sprite.Sprite):
 
         #함수내용 구현시 필요 한것
         self.gravity=MAX_SPEED/FPS                        #왕복하는데 걸리는 프레임
-        self.speed=[0,-MAX_SPEED]                         #공의 속도를 조정 [x,y]
+        self.speed=[0,0]                                    #공의 속도를 조정 [x,y]
         self.dontchangespeed=0                            # 좌우스피드 변경 불가능하게 하는 프레임수
 
 
@@ -124,4 +124,5 @@ class Ball(pygame.sprite.Sprite):
         except IndexError:
             return self.rect.center
 
-
+    def set_location(self,loc):
+        self.rect.center=loc

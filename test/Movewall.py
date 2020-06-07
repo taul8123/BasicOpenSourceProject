@@ -15,9 +15,7 @@ class Movewall(Wall.Wall):
 
     def Move(self):
         '''끝측정은 블럭의 끝으로 한다'''
-        print(self.speed)
         self.rect.center=(self.rect.center[0]+self.speed[0],self.rect.center[1]+self.speed[1])
-        print(self.rect.center)
 
         if self.rect.left<=self.end_x[0] or self.rect.right>=self.end_x[1]:
             #이상하게 -를 할때가 속도가 빠름
