@@ -16,6 +16,8 @@ class Magnetic(pygame.sprite.Sprite):
         #벽의 아래 또는 윗면과 부딧혔을때
         #y좌표는 낮을수록 위이기에 ball이 더 작을 경우가 wall이 아래 있음
         if self.rect.top >= ball.get_center(1) - ball.get_speed(1):
+            if ball.get_speed(1)>10:
+                return 1
             ball.speed_set_y(-Ball.MAX_SPEED * 0.75)
         #wall의 좌표가 작을때 즉 더 위에 있을 경우
         elif self.rect.bottom<=ball.get_center(1)-ball.get_speed(1):

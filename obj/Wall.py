@@ -36,3 +36,13 @@ class Wall(pygame.sprite.Sprite):#스프라이트 상속
 
         return 0
 
+    def get_center(self, index=2):
+        '''rect.center를 반환 인자로 0을 넣으면 x좌표가 1을 넣으면 y좌표가 반환 됨'''
+        try:
+            return self.rect.center[index]
+        except IndexError:
+            return self.rect.center
+
+    def set_location(self, loc):
+        self.rect.center = loc
+

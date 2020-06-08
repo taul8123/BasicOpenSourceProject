@@ -1,6 +1,6 @@
 import pygame
 from obj import Wall
-
+'''포탈에 맞춰서 수정필요'''
 
 class Movewall(Wall.Wall):
     def __init__(self, img, location, area,distance,FPS=60,speed=1):  # 이미지,설치좌표(튜플로 전달),폭과 높이를 튜플로 전달,이동 거리
@@ -30,5 +30,15 @@ class Movewall(Wall.Wall):
                 self.speed[1] = -self.speed[1] / 2
             elif self.speed[1] < 0:
                 self.speed[1] = -self.speed[1] * 2
+
+    def get_center(self,index=2):
+        '''rect.center를 반환 인자로 0을 넣으면 x좌표가 1을 넣으면 y좌표가 반환 됨'''
+        try:
+            return self.rect.center[index]
+        except IndexError:
+            return self.rect.center
+
+    def set_location(self,loc):
+        self.rect.center=loc
 
 
