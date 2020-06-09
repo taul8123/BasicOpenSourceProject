@@ -1,6 +1,6 @@
 #2019038026_이혁수
 import pygame
-from obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring, Fakewall, Thorn, Ball, Wall, iccle,Laser,lever,potal
+from obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring, Fakewall, Thorn, Ball, Wall, iccle,Laser,lever,potal,Cannon
 
 img=['wall','star','setting','Exit',"thorn","Help"]#이미지 이름
 
@@ -24,6 +24,7 @@ def map(screen):#스크린을 전달받음
     Laser_list=pygame.sprite.Group()
     lever_list=pygame.sprite.Group()
     potal_list=pygame.sprite.Group()
+    cannon_list=pygame.sprite.Group()
 
 
     background= pygame.Surface(screen.get_size())#스크린과 동일크기의 surface생성 이곳에 그린후 스크린에 복사
@@ -39,14 +40,17 @@ def map(screen):#스크린을 전달받음
 
     ball= Ball.Ball(image_list[2], (400, 900), (25, 15))
 
-    #이부분은 일단 고드름을 위해서 이렇게 해 논것으로 재량껏 수정
+    #이부분은 일단 이렇게 해 논것으로 재량껏 수정
     wall=Wall.Wall(image_list[0], (0, 1000), (2000, 150))
     movewall=Movewall.Movewall(image_list[0], (550, 850), (30, 30), (100, 100), FPS)
+    wall2 = Wall.Wall(image_list[0], (1500, 200), (150, 1000))
+    lay = Laser.Layserblock(image_list[3], image_list[0], (800, 950), (30, 30), [wall2, wall], 0)
+    ice=iccle.Iccle(image_list[0], (500, 700), (30, 30),[wall,movewall],FPS)
+    cannon=Cannon.Cannon(image_list[3],image_list[1],(800,700),(30,30),[wall2],time=3)
     #그룹에 추가
     wall_list.add(wall)
     wall_list.add(Wall.Wall(image_list[0], (0, 200), (150, 1000)))
     wall_list.add(Wall.Wall(image_list[0], (210, 50), (150, 900)))
-    wall2=Wall.Wall(image_list[0], (1500, 200), (150, 1000))
     wall_list.add(wall2)
 
     fakewall_list.add(Fakewall.Fakewall(image_list[0], (500, 950), (30, 30), FPS))
@@ -57,12 +61,16 @@ def map(screen):#스크린을 전달받음
     magnetic_list.add(Magnetic.Magnetic(image_list[3], (450, 950), (30, 30)))
     restart_list.add(Backblock.Backblock(image_list[2], (550, 850), (30, 30), (400, 900)))
     Blckhole_list.add(Blckhole.Blackhole(image_list[1], (650, 900), (50, 50)))
-    iccle_list.add(iccle.Iccle(image_list[0], (500, 700), (30, 30),[wall,movewall],FPS))#fakewall은 넣지 않음
-    Laser_list.add(Laser.Layserblock(image_list[3],image_list[0],(800,950),(30,30),[wall2,wall],0))
+    iccle_list.add(ice)#fakewall은 넣지 않음
+
+    Laser_list.add(lay)
 
     lever_list.add(lever.Lever(image_list[3],(image_list[5],image_list[0]),(450,950),[(350,950)],(30,30)))
 
-    potal_list.add(potal.Potal(image_list[2],image_list[2],(900,950),(1000,800),(30,30),[]))
+    potal_list.add(potal.Potal(image_list[2],image_list[2],(500,800),(1000,800),(30,30),obj=[movewall,ice],group=[lay,cannon]))
+
+    cannon_list.add(cannon)
+
 
 
 
@@ -165,7 +173,7 @@ def map(screen):#스크린을 전달받음
         for layblock in Laser_list:
             layblock.layser()
             #레이저와 충돌
-            collision_list = pygame.sprite.spritecollide(ball, layblock.layser_list, False, pygame.sprite.collide_mask)
+            collision_list = pygame.sprite.spritecollide(ball, layblock.get_subgroup(), False, pygame.sprite.collide_mask)
             for l in collision_list:
                 return 0
         collision_list = pygame.sprite.spritecollide(ball, Laser_list, False, pygame.sprite.collide_mask)
@@ -189,7 +197,17 @@ def map(screen):#스크린을 전달받음
             p.teleport(ball)
             p.return_subpotal().teleport(ball)
 
-
+        #대포
+        for c in cannon_list:
+            c.shoot()
+            #대포알과 충돌
+            collision_list = pygame.sprite.spritecollide(ball, c.get_subgroup(), False, pygame.sprite.collide_mask)
+            for l in collision_list:
+                return 0
+        collision_list = pygame.sprite.spritecollide(ball, cannon_list, False, pygame.sprite.collide_mask)
+        for cannon in collision_list:
+            if cannon.collision(ball):
+                return 0
 
 
 
@@ -223,6 +241,9 @@ def map(screen):#스크린을 전달받음
         potal_list.draw(background)
         for p in potal_list:
             p.draw_potal(background)
+        cannon_list.draw(background)
+        for c in cannon_list:
+            c.draw_shell(background)
 
         #스크린에 그리고 새로고침
         screen.blit(background,(0,0))

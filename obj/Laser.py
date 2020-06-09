@@ -15,24 +15,32 @@ class Layser(pygame.sprite.Sprite):
         self.rect.center = location  # 위치설정
         self.mask = pygame.mask.from_surface(self.image)  # 충돌감지를 위한 마스크생성
 
+        self.direction=direction
 
-
-    def Move(self,direction):
+    def Move(self):
         '''방향에 따라 이동'''
-        if direction==0:
+        if self.direction==0:
             self.rect.centery=self.rect.centery-size
-        elif direction==1:
+        elif self.direction==1:
             self.rect.centerx=self.rect.centerx+size
-        elif direction==2:
+        elif self.direction==2:
             self.rect.centerx=self.rect.centery+size
-        elif direction==3:
+        elif self.direction==3:
             self.rect.centerx=self.rect.centerx-size
 
         if self.rect.right < 0 or self.rect.left>width or self.rect.top>height or self.rect.bottom<0:
             return 1
         return 0
 
+    def set_location(self, loc):
+        self.rect.center = loc
 
+    def get_center(self, index=2):
+        '''rect.center를 반환 인자로 0을 넣으면 x좌표가 1을 넣으면 y좌표가 반환 됨'''
+        try:
+            return self.rect.center[index]
+        except IndexError:
+            return self.rect.center
 
 
 class Layserblock(Wall.Wall):
@@ -58,15 +66,15 @@ class Layserblock(Wall.Wall):
         elif self.direction==3:
             self.d=(self.rect.centerx-size,self.rect.centery)
 
-        def get_center(self, index=2):
-            '''rect.center를 반환 인자로 0을 넣으면 x좌표가 1을 넣으면 y좌표가 반환 됨'''
-            try:
-                return self.rect.center[index]
-            except IndexError:
-                return self.rect.center
+    def get_center(self, index=2):
+        '''rect.center를 반환 인자로 0을 넣으면 x좌표가 1을 넣으면 y좌표가 반환 됨'''
+        try:
+            return self.rect.center[index]
+        except IndexError:
+            return self.rect.center
 
-        def set_location(self, loc):
-            self.rect.center = loc
+    def set_location(self, loc):
+        self.rect.center = loc
 
     def layser(self):
         self.frame_counter -= 1
@@ -79,7 +87,7 @@ class Layserblock(Wall.Wall):
             return 0
 
         for layser in self.layser_list:
-            if layser.Move(self.direction):
+            if layser.Move():
                 self.layser_list.remove(layser)
 
         for obj in self.col_obj:
@@ -92,6 +100,8 @@ class Layserblock(Wall.Wall):
     def draw_layser(self,background):
         self.layser_list.draw(background)
 
+    def get_subgroup(self):
+        return  self.layser_list
 
 
 
