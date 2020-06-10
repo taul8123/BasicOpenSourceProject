@@ -1,5 +1,4 @@
 import pygame
-from obj import subpotal
 size=40
 '''텔레포트 될곳에 객체가 있을경우 겹쳐지는 오류발생'''
 
@@ -95,7 +94,6 @@ class Potal(pygame.sprite.Sprite):
             col_list=pygame.sprite.spritecollide(self, group.get_subgroup(), False, pygame.sprite.collide_mask)
             for obj in col_list:
                 loc = list(self.potal.rect.center)
-                print(loc, end=' ')
                 # 어디서 충돌했는지 확인
                 if obj.get_center(0) < self.rect.left:
                     loc[0] += size
@@ -105,6 +103,15 @@ class Potal(pygame.sprite.Sprite):
                     loc[1] += size
                 elif obj.get_center(1) > self.rect.bottom:
                     loc[1] -= size
-                print(loc)
                 obj.set_location(loc)
+
+    def set_collision_obj(self,obj_list):
+        self.col_obj=obj_list
+    def set_collision_group(self,group_list):
+        self.col_group=group_list
+
+    def collision_check(self):
+        if not self.col_obj or not self.col_group:
+            return -1
+        return 0
 

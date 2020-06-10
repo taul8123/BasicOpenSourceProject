@@ -44,8 +44,8 @@ class Layser(pygame.sprite.Sprite):
 
 
 class Layserblock(Wall.Wall):
-    def __init__(self,block_img,layser_img,location,area,obj,direction=1,FPS=60,time=5):
-        '''블럭 이미지, 레이저 이미지, 위치(튜플),면적(튜플),(충돌 가능성이 있는 객체들 공제외 (리스트),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 레이저가  나오고 안나오는 상태가 지속되는 시간'''
+    def __init__(self,block_img,layser_img,location,area,direction=1,FPS=60,time=5,obj=[]):
+        '''블럭 이미지, 레이저 이미지, 위치(튜플),면적(튜플),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 레이저가  나오고 안나오는 상태가 지속되는 시간,충돌 가능성이 있는 객체들 공제외 (리스트)'''
         Wall.Wall.__init__(self,block_img,location,area)
         self.layser_list=pygame.sprite.Group()
         self.layser_img=layser_img
@@ -77,6 +77,7 @@ class Layserblock(Wall.Wall):
         self.rect.center = loc
 
     def layser(self):
+
         self.frame_counter -= 1
         if self.frame_counter <=0:
             self.state= not self.state
@@ -103,6 +104,13 @@ class Layserblock(Wall.Wall):
     def get_subgroup(self):
         return  self.layser_list
 
+    def set_collision(self,obj_list):
+        self.col_obj=obj_list
+
+    def collision_check(self):
+        if not self.col_obj:
+            return -1
+        return 0
 
 
 

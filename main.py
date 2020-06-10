@@ -61,9 +61,9 @@ while True:
     if Show_score:
         continue
     if Game_screen:
-        run=1
-        while run:
-            run=testmap.map(screen)
+        run=0
+        while run != -2:
+            run=testmap.map(screen,run)
         Start_Screen = True
         Game_screen = False
     if Score_Board:

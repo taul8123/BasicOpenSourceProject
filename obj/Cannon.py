@@ -41,15 +41,15 @@ class Shell(pygame.sprite.Sprite):
             return self.rect.center
 
 class Cannon(Wall.Wall):
-    def __init__(self,cannon_img,shell_img,location,area,obj,direction=1,FPS=60,time=5,speed=3):
-        '''블럭 이미지, 레이저 이미지, 위치(튜플),면적(튜플),충돌 가능성이 있는 객체들 공제외 (리스트),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 포탄발사 시간'''
+    def __init__(self,cannon_img,shell_img,location,area,direction=1,FPS=60,time=5,speed=3,obj=[]):
+        '''블럭 이미지, 대포알 이미지, 위치(튜플),면적(튜플),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 포탄발사 시간,스피드,충돌 가능성이 있는 객체들 공제외 (리스트)'''
         Wall.Wall.__init__(self,cannon_img,location,area)
         self.shell_list=pygame.sprite.Group()
         self.shell_img=shell_img
         self.col_obj = obj
 
         self.term=FPS*time              # 상태가 위지되어 있을 프레임 수
-        self.frame_counter = self.term  # 0일 경우 상태유지
+        self.frame_counter = self.term  # 0보다 클 경우 상태유지
         self.direction=direction
         self.speed=speed
 
@@ -83,3 +83,11 @@ class Cannon(Wall.Wall):
 
     def get_subgroup(self):
         return self.shell_list
+
+    def set_collision(self,obj_list):
+        self.col_obj=obj_list
+
+    def collision_check(self):
+        if not self.col_obj:
+            return -1
+        return 0

@@ -3,8 +3,8 @@ import pygame
 Fall_speed=4
 
 class Iccle(pygame.sprite.Sprite):
-    def __init__(self,img,location,area,obj,FPS=60,time=5,speed=1):
-        '''블럭 이미지, 위치(튜플),면적(튜플),충돌 가능성이 있는 객체들 공제외 (리스트), FPS, 고드름이 사라져있는 시간'''
+    def __init__(self,img,location,area,FPS=60,time=5,speed=1,obj=[]):
+        '''블럭 이미지, 위치(튜플),면적(튜플), FPS, 고드름이 사라져있는 시간,충돌 가능성이 있는 객체들 공제외 (리스트)'''
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image= pygame.transform.scale(img,area)    #이미지의 크기를 내가 원하는 크기로 조정
         self.rect= self.image.get_rect()                #이미지의 사각형에 해당하는 범위를 가져옴
@@ -59,3 +59,11 @@ class Iccle(pygame.sprite.Sprite):
 
     def set_location(self,loc):
         self.rect.center=loc
+
+    def set_collision(self,obj_list):
+        self.col_obj=obj_list
+
+    def collision_check(self):
+        if not self.col_obj:
+            return -1
+        return 0
