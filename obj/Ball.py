@@ -2,6 +2,8 @@
 import pygame
 
 MAX_SPEED=3     #최대 속도
+width=1920
+height=1080
 def to_Zero(num):
     '''관성구현을 휘한 함수'''
     if num < 0:
@@ -13,7 +15,7 @@ def to_Zero(num):
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, img, location, area,FPS=30):     # 이미지,설치좌표(튜플로 전달),넓이와 높이를 튜플로 전달  ex: (가로,세로),FPS
+    def __init__(self, img, location, area,FPS=60):     # 이미지,설치좌표(튜플로 전달),넓이와 높이를 튜플로 전달  ex: (가로,세로),FPS
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image = pygame.transform.scale(img, area)  # 이미지의 크기를 내가 원하는 크기로 조정
         self.rect = self.image.get_rect()               # 이미지의 사각형에 해당하는 범위를 가져옴
@@ -81,6 +83,15 @@ class Ball(pygame.sprite.Sprite):
             self.movex()
 
         self.move_y()
+
+        if self.rect.top>height or self.rect.bottom<0:
+            return 1
+        elif self.rect.left<0:
+            self.rect.left=0
+        elif self.rect.right>width:
+            self.rect.right=0
+
+        return 0
 
     def speed_set_y(self,s):
         '''y축 속도 변경'''

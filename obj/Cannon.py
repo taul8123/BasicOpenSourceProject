@@ -2,7 +2,6 @@ import pygame
 from obj import Wall
 width=1920
 height=1080
-size=40
 
 class Shell(pygame.sprite.Sprite):
     def __init__(self, img, location, direction,speed):
