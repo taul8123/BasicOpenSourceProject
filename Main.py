@@ -1,6 +1,7 @@
 # Bouncy Dungeon Tech-alpha 0.1
-import pygame, sys, os, configparser
+import pygame, sys, os, configparser, testmap
 from pygame.locals import *
+
 
 
 # Setting before Main
@@ -102,6 +103,7 @@ def Start_Menu():
 def Game_Menu():
     running = True
     while running:
+        testmap.Map(screen)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
