@@ -4,12 +4,14 @@ from game.data.obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring,
 
 
 
-def loadmap(screen):
+def loadmap(screen, Map_name = "map.txt"):
+    print("맵 '{0}' 을(를) 로드합니다.".format(Map_name))
     try:
-        f = open('map.txt', 'rt', encoding='UTF8')
+        f = open(Map_name, 'rt', encoding='UTF8')
     except:
         print("불러올 맵이 존재하지 않습니다.\a")
         return -1
+    print("맵 '{0}' 을(를) 로드했습니다.".format(Map_name))
 
     size = f.readline().split(' ')
     width = int(size[0])
@@ -19,6 +21,9 @@ def loadmap(screen):
     filename = filename.replace("\n", "")
     if filename == "0":
         filename = "Background.png"
+
+    print("배경 '{0}' 을(를) 로드합니다.".format(filename))
+
 
     backblock_list = pygame.sprite.Group()
     #ball_list = pygame.sprite.Group()
@@ -39,6 +44,9 @@ def loadmap(screen):
     cannon_list = pygame.sprite.Group()
 
     subportal_list = pygame.sprite.Group()
+
+    Start_background = pygame.image.load("mapeditimage/{0}".format(filename))
+    print("배경 '{0}' 을(를) 로드했습니다.".format(filename))
 
     cannonball_image = pygame.image.load('mapeditimage/cannonball.png')
 
@@ -61,7 +69,9 @@ def loadmap(screen):
     cannon_image = pygame.image.load('mapeditimage/cannon.png')
 
     subportal_image = pygame.image.load('mapeditimage/subportal.png')
-
+    laserline_image = pygame.image.load('mapeditimage/line.png')
+    leveron_image = pygame.image.load('mapeditimage/leverON.png')
+    leveroff_image = pygame.image.load('mapeditimage/leverOFF.png')
 
 
     while True:
@@ -86,7 +96,7 @@ def loadmap(screen):
             magnetic_list.add(Magnetic.Magnetic(magnetic_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('movewal') != -1:
             movewal_list.add(Movewall.Movewall(movewal_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3])),\
-                                               (int(temp[5]), int(temp[4]))))
+                                               (int(temp[5]), int(temp[6]))))
         elif temp[0].find('star') != -1:
             star = Star.Star(star_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3])))
         elif temp[0].find('thorn') != -1:
@@ -99,17 +109,16 @@ def loadmap(screen):
         elif temp[0].find('icicle') != -1:
             icicle_list.add(iccle.Iccle(icicle_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('laser') != -1:
-            continue
-            laser_list.add(Laser.Layser(laser_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
+            laser_list.add(Laser.Layserblock(laser_image, laserline_image, (int(temp[1]), int(temp[2])),\
+                                        (int(temp[3]), int(temp[3])), int(temp[4])))
         elif temp[0].find('blinkblock') != -1:
             blinkblock_list.add(Blink_block.block(blinkblock_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
 
         elif temp[0].find('lever') != -1:
-            continue
-            lever_list.add(lever.Lever(lever_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
+            lever_list.add(lever.Lever(lever_image, (leveron_image, leveroff_image), (int(temp[1]), int(temp[2])), [(int(temp[5]), int(temp[6]))], (int(temp[3]), int(temp[3]))))
         elif temp[0].find('portal') != -1:
-            continue
-            portal_list.add(potal.Potal(portal_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
+            portal_list.add(potal.Potal(portal_image, subportal_image, (int(temp[1]), int(temp[2])), (int(temp[4]), int(temp[5])),\
+                                        (int(temp[3]), int(temp[3]))))
         elif temp[0].find('cannon') != -1:
             cannon_list.add(Cannon.Cannon(cannon_image, cannonball_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         else:
