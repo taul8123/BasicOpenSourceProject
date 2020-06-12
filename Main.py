@@ -7,13 +7,13 @@ from pygame.locals import *
 mainClock = pygame.time.Clock()
 
 # Load Config.cfg
-configParser = configparser.RawConfigParser()
+config = configparser.RawConfigParser()
 configFilePath = os.path.join(os.path.dirname(__file__), 'game/data/Setting.cfg')
-configParser.read(configFilePath)
-FullToggle = configParser.get("Setting", "Fullscreen_Toggle")
-SoundFX = configParser.get("Setting", "Sound_Fx")
-SoundToggle = configParser.get("Setting", "Sound")
-ScoreToggle = configParser.get("Setting", "Display_Score")
+config.read(configFilePath)
+FullToggle = config.get("Setting", "Fullscreen_Toggle")
+SoundToggle = config.get("Setting", "Sound")
+ScoreToggle = config.get("Setting", "Display_Score")
+Sensitive = config.get("Setting", "Sensitive")
 
 # Pygame Initialize
 pygame.init()
@@ -34,6 +34,10 @@ Setting_Button = pygame.image.load("game/image/Setting.png")
 Exit_Button = pygame.image.load("game/image/Exit.png")
 Gray_Background = pygame.image.load("game/image/Gray Background.png")
 Score_Board = pygame.image.load("game/image/Score_Board.png")
+Setting_Screen = pygame.image.load("game/image/Setting_Screen.png")
+Chk = pygame.image.load("game/image/Chk.png")
+Chk_2 = pygame.image.load("game/image/Chk.png")
+Chk_Box = pygame.image.load("game/image/Chk_Box.png")
 Click_Sound = pygame.mixer.Sound("game/audio/click.wav")
 
 class button():
@@ -86,7 +90,7 @@ def Start_Menu():
                     Help_Menu()
                 if exit_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    pygame.time.wait(100)
+                    pygame.time.wait(300)
                     pygame.quit()
                     sys.exit()
             if event.type == pygame.QUIT:
@@ -106,11 +110,58 @@ def Game_Menu():
 
 def Setting_Menu():
     running = True
+    screen.blit(Setting_Screen, (0,0))
+    Sound_Button = button(625, 335, 75, 75)
+    Score_Button = button(970, 475, 75, 75)
+    Sensitive_LOW_Button = button(780, 600, 160, 80)
+    Sensitive_MID_Button = button(1065, 600, 160, 80)
+    Sensitive_HIGH_Button = button(1380, 600, 160, 80)
+
     while running:
+        if SoundToggle == "True":
+            screen.blit(Chk, (600, 320))
+        if ScoreToggle == "True":
+            screen.blit(Chk_2, (945, 460))
+        if Sensitive == "Low":
+            screen.blit(Chk_Box, (775, 600))
+        if Sensitive == "Mid":
+            screen.blit(Chk_Box, (1060, 600))
+        if Sensitive == "High":
+            screen.blit(Chk_Box, (1375, 600))
         for event in pygame.event.get():
+            pos = pygame.mouse.get_pos()
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if Sound_Button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    if SoundToggle == "False":
+                        config.set("Setting", "Sound", "True")
+                    else:
+                        config.set("Setting", "Sound", "False")
+                if Score_Button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    if ScoreToggle == "False":
+                        config.set("Setting", "Display_Score", "True")
+                    else:
+                        config.set("Setting", "Display_Score", "False")
+                if Sensitive_LOW_Button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    config.set("Setting", "Sensitive", "Low")
+                if Sensitive_MID_Button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    config.set("Setting", "Sensitive", "Mid")
+                if Sensitive_HIGH_Button.isOver(pos):
+                    pygame.mixer.Sound.play(Click_Sound)
+                    config.set("Setting", "Sensitive", "High")
+                ConfigFile = open('game/data/Setting.cfg', 'w')
+                config.write(ConfigFile)
+                ConfigFile.close()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = 0
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+        pygame.display.flip()
 
 
 def Score_Menu():
@@ -141,6 +192,9 @@ def Score_Menu():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = 0
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
 
 
 def Help_Menu():
