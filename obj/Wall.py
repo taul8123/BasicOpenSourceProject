@@ -21,6 +21,8 @@ class Wall(pygame.sprite.Sprite):#스프라이트 상속
             if ball.get_speed(1)>10:
                 return 1
             ball.speed_set_y(-Ball.MAX_SPEED)
+            Ball.ballsound.play()
+
         #wall의 좌표가 작을때 즉 더 위에 있을 경우
         elif self.rect.bottom<=ball.get_center(1)-ball.get_speed(1):
             if ball.get_speed(1)< 1:

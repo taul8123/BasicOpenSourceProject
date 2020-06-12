@@ -48,17 +48,17 @@ def map(screen,k):#스크린을 전달받음
     wall2 = Wall.Wall(image_list[0], (1500, 200), (150, 1000))
     #레이저
     lay = Laser.Layserblock(image_list[3], image_list[0], (800, 950), (30, 30), 0)
-    lay.set_collision([wall2, wall])
+    lay.set_collision([wall2, wall])    #충돌을 확인할 객체추가
     #고드름
     ice=iccle.Iccle(image_list[0], (500, 700), (30, 30),FPS)
-    ice.set_collision([wall,movewall])
+    ice.set_collision([wall,movewall])  #충돌을 확인할 객체추가
     #대포
     cannon=Cannon.Cannon(image_list[3],image_list[1],(800,700),(30,30),time=3)
-    cannon.set_collision([wall2])
+    cannon.set_collision([wall2])   #충돌을 확인할 객체추가
     #포탈
     p=potal.Potal(image_list[2],image_list[2],(500,800),(1000,800),(30,30))
-    p.set_collision_obj([movewall,ice])
-    p.set_collision_group([lay,cannon])
+    p.set_collision_obj([movewall,ice]) #충돌을 확인할 객체추가
+    p.set_collision_group([lay,cannon]) #충돌을 확인 해야되는 그룹을 가진 객체 추가(레이저나 대포)
     #그룹에 추가
     wall_list.add(wall)
     wall_list.add(Wall.Wall(image_list[0], (0, 200), (150, 1000)))
@@ -88,28 +88,21 @@ def map(screen,k):#스크린을 전달받음
     Blinkblock_list.add(Blink_block.block(image_list[0], (150, 970), (30, 30), FPS))
 
     #충돌 감지 넣었는지 체크
-    try:
-        for o in Laser_list:
-            if o.collision_check():
-                raise excption.LaserError()
-        for o in cannon_list:
-            if o.collision_check():
-                raise excption.CannonError()
-        for o in potal_list:
-            if o.collision_check():
-                raise excption.PotalError()
-        for o in iccle_list:
-            if o.collision_check():
-                raise excption.IccleError()
-    except excption.LaserError:
-        raise
-    except excption.CannonError:
-        raise
-    except excption.PotalError:
-        raise
-    except excption.IccleError:
-        raise
-
+    for o in Laser_list:
+        if o.collision_check():
+            raise excption.LaserError()
+    for o in cannon_list:
+        if o.collision_check():
+            raise excption.CannonError()
+    #포탈의 경우 없어도 되지만 일단 체크하도록 설정 공만 이동하게 할것이라면 포탈에러 체크 부분 삭제
+    # 여기부터
+    for o in potal_list:
+        if o.collision_check():
+            raise excption.PotalError()
+    #여기까지
+    for o in iccle_list:
+        if o.collision_check():
+            raise excption.IccleError()
     while done:
         clock.tick(FPS)     #프레임 설정
 
@@ -132,7 +125,8 @@ def map(screen,k):#스크린을 전달받음
                     key-=1
 
         # 공이동
-        ball.move_check(key)
+        if ball.move_check(key):
+            return exit
 
         #벽과충돌
         collision_list = pygame.sprite.spritecollide(ball, wall_list, False, pygame.sprite.collide_mask)
@@ -296,4 +290,4 @@ def map(screen,k):#스크린을 전달받음
 
     else:
         print("클리어")
-        return 0
+        return exit

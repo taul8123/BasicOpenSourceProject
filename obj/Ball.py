@@ -4,6 +4,10 @@ import pygame
 MAX_SPEED=3     #최대 속도
 width=1920
 height=1080
+
+pygame.mixer.init()
+ballsound=pygame.mixer.Sound('51460__andre-nascimento__basket-ball-01-bounce.wav')
+
 def to_Zero(num):
     '''관성구현을 휘한 함수'''
     if num < 0:

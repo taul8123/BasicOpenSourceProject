@@ -29,6 +29,7 @@ class subpotal(pygame.sprite.Sprite):
 
         for obj in self.col_obj:
             if (pygame.sprite.collide_mask(obj, self)):
+                print(0)
                 loc = list(self.potal.rect.center)
                 # 어디서 충돌했는지 확인
                 if obj.get_center(0) < self.rect.left:
@@ -107,9 +108,10 @@ class Potal(pygame.sprite.Sprite):
 
     def set_collision_obj(self,obj_list):
         self.col_obj=obj_list
+        self.potal.col_obj=obj_list
     def set_collision_group(self,group_list):
         self.col_group=group_list
-
+        self.potal.col_group=group_list
     def collision_check(self):
         if not self.col_obj or not self.col_group:
             return -1
