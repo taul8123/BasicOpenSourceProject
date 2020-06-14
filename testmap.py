@@ -8,6 +8,10 @@ exit = -2
 die=-1
 win=1
 
+def menu():
+    print("메뉴")
+    return 1
+
 def Map(screen):#스크린을 전달받음
     done = 1
     FPS = 60        #프레임
@@ -82,14 +86,16 @@ def Map(screen):#스크린을 전달받음
         #이벤트 받아오기
         event = pygame.event.get()
         for e in event:
-            if e.type == pygame.MOUSEBUTTONDOWN:
-                return exit
+
             #키보드 누름
             if e.type ==pygame.KEYDOWN:
                 if e.key == pygame.K_LEFT:
                     key-=1
                 elif e.key ==pygame.K_RIGHT:
                     key+=1
+                elif e.key == pygame.K_ESCAPE:
+                    if menu():
+                        return exit
             #키보드 뗌
             if e.type ==pygame.KEYUP:
                 if e.key == pygame.K_LEFT:
