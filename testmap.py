@@ -40,7 +40,7 @@ def Map(screen):#스크린을 전달받음
 
     #list_collection = [backblock_list, ball, blckhole_list, fakewal_list, magnetic_list, movewal_list, star, thorn_list, wall_list\
     #        ,spring_list, icicle_list, laser_list, blinkblock_list, lever_list, portal_list, cannon_list]
-    list_collection = LoadMap.loadmap(screen)
+    list_collection = LoadMap.loadmap(screen, 'testmap.txt') ################맵 이름 매개변수로 지정할 수 있음 default = 'map.txt'
     backblock_list = list_collection[0]
     ball = list_collection[1]
     Blckhole_list = list_collection[2]

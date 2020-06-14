@@ -63,7 +63,7 @@ SaveFile = "map.txt"
 display = []
 movepos = []
 try:
-    f = open(OpenFile, 'r', encoding='UTF8')
+    f = open('game/data/maps/{0}'.format(OpenFile), 'r', encoding='UTF8')
 except:
     window = Tk()
     window.title("배경이미지 선택")
@@ -80,7 +80,7 @@ except:
     label4.pack()
     window.mainloop()
     direct = filename.split('/')
-    shutil.copy(filename, './mapeditimage/{0}'.format(direct[-1]))
+    shutil.copy(filename, 'game/data/mapeditimage/Backgrounds/{0}'.format(direct[-1]))
     filename = direct[-1]
 
     for i in range(width // pixel_size):
@@ -108,36 +108,36 @@ else:
 pygame.init()
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-Start_background = pygame.image.load("mapeditimage/{0}".format(filename))
-default_toolbox = pygame.image.load('mapeditimage/toolbox.png')
-default_move = pygame.image.load('mapeditimage/move.png')
-default_eraser = pygame.image.load('mapeditimage/eraser.png')
-default_select = pygame.image.load('mapeditimage/select.png')
-default_xmark = pygame.image.load('mapeditimage/xmark.png')
+Start_background = pygame.image.load("game/image/mapeditimage/Backgrounds/{0}".format(filename))
+default_toolbox = pygame.image.load('game/image/mapeditimage/toolbox.png')
+default_move = pygame.image.load('game/image/mapeditimage/move.png')
+default_eraser = pygame.image.load('game/image/mapeditimage/eraser.png')
+default_select = pygame.image.load('game/image/mapeditimage/select.png')
+default_xmark = pygame.image.load('game/image/mapeditimage/xmark.png')
 
-default_blackdot = pygame.image.load('mapeditimage/blackdot.png')
+default_blackdot = pygame.image.load('game/image/mapeditimage/blackdot.png')
 
-default_subportal = pygame.image.load('mapeditimage/subportal.png')
-default_leverOnOff = pygame.image.load('mapeditimage/leverOn.png')
+default_subportal = pygame.image.load('game/image/mapeditimage/subportal.png')
+default_leverOnOff = pygame.image.load('game/image/mapeditimage/leverOn.png')
 
-default_backblock = pygame.image.load('mapeditimage/backblock.png')
-default_ball = pygame.image.load('mapeditimage/ball.png')
-default_blckhole = pygame.image.load('mapeditimage/blckhole.png')
-default_fakewal = pygame.image.load('mapeditimage/fakewal.png')
-default_magnetic = pygame.image.load('mapeditimage/magnetic.png')
-default_movewal = pygame.image.load('mapeditimage/movewal.png')
-default_star = pygame.image.load('mapeditimage/star.png')
-default_thorn = pygame.image.load('mapeditimage/thorn.png')
-default_wall = pygame.image.load('mapeditimage/wall.png')
-default_spring = pygame.image.load('mapeditimage/spring.png')
-default_icicle = pygame.image.load('mapeditimage/icicle.png')
-default_laser = pygame.image.load('mapeditimage/laser.png')
-default_endpoint = pygame.image.load('mapeditimage/endpoint.png')
+default_backblock = pygame.image.load('game/image/mapeditimage/backblock.png')
+default_ball = pygame.image.load('game/image/mapeditimage/ball.png')
+default_blckhole = pygame.image.load('game/image/mapeditimage/blckhole.png')
+default_fakewal = pygame.image.load('game/image/mapeditimage/fakewal.png')
+default_magnetic = pygame.image.load('game/image/mapeditimage/magnetic.png')
+default_movewal = pygame.image.load('game/image/mapeditimage/movewal.png')
+default_star = pygame.image.load('game/image/mapeditimage/star.png')
+default_thorn = pygame.image.load('game/image/mapeditimage/thorn.png')
+default_wall = pygame.image.load('game/image/mapeditimage/wall.png')
+default_spring = pygame.image.load('game/image/mapeditimage/spring.png')
+default_icicle = pygame.image.load('game/image/mapeditimage/icicle.png')
+default_laser = pygame.image.load('game/image/mapeditimage/laser.png')
+default_endpoint = pygame.image.load('game/image/mapeditimage/endpoint.png')
 
-default_blinkblock = pygame.image.load('mapeditimage/blinkblock.png')
-default_lever = pygame.image.load('mapeditimage/lever.png')
-default_portal = pygame.image.load('mapeditimage/portal.png')
-default_cannon = pygame.image.load('mapeditimage/cannon.png')
+default_blinkblock = pygame.image.load('game/image/mapeditimage/blinkblock.png')
+default_lever = pygame.image.load('game/image/mapeditimage/lever.png')
+default_portal = pygame.image.load('game/image/mapeditimage/portal.png')
+default_cannon = pygame.image.load('game/image/mapeditimage/cannon.png')
 
 class newicon():
     def __init__(self, x, y, blocktype, width, height):
@@ -304,7 +304,7 @@ while True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                f = open(SaveFile, 'w', encoding='UTF8')
+                f = open('game/data/maps/{0}'.format(SaveFile), 'w', encoding='UTF8')
                 save = str(width) + " " + str(height) + " " + str(pixel_size) + "\n"
                 f.write(save)
                 f.write(filename + "\n")

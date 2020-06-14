@@ -7,7 +7,7 @@ from game.data.obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring,
 def loadmap(screen, Map_name = "map.txt"):
     print("맵 '{0}' 을(를) 로드합니다.".format(Map_name))
     try:
-        f = open(Map_name, 'rt', encoding='UTF8')
+        f = open('game/data/maps/{0}'.format(Map_name), 'rt', encoding='UTF8')
     except:
         print("불러올 맵이 존재하지 않습니다.\a")
         return -1
@@ -45,33 +45,33 @@ def loadmap(screen, Map_name = "map.txt"):
 
     subportal_list = pygame.sprite.Group()
 
-    Start_background = pygame.image.load("mapeditimage/{0}".format(filename))
+    Start_background = pygame.image.load("game/image/mapeditimage/Backgrounds/{0}".format(filename))
     print("배경 '{0}' 을(를) 로드했습니다.".format(filename))
 
-    cannonball_image = pygame.image.load('mapeditimage/cannonball.png')
+    cannonball_image = pygame.image.load('game/image/mapeditimage/cannonball.png')
 
-    backblock_image = pygame.image.load('mapeditimage/move.png')
-    ball_image = pygame.image.load('mapeditimage/ball.png')
-    blckhole_image = pygame.image.load('mapeditimage/blckhole.png')
-    fakewal_image = pygame.image.load('mapeditimage/fakewal.png')
-    magnetic_image = pygame.image.load('mapeditimage/magnetic.png')
-    movewal_image = pygame.image.load('mapeditimage/movewal.png')
-    star_image = pygame.image.load('mapeditimage/star.png')
-    thorn_image = pygame.image.load('mapeditimage/thorn.png')
-    wall_image = pygame.image.load('mapeditimage/wall.png')
-    spring_image = pygame.image.load('mapeditimage/spring.png')
+    backblock_image = pygame.image.load('game/image/mapeditimage/move.png')
+    ball_image = pygame.image.load('game/image/mapeditimage/ball.png')
+    blckhole_image = pygame.image.load('game/image/mapeditimage/blckhole.png')
+    fakewal_image = pygame.image.load('game/image/mapeditimage/fakewal.png')
+    magnetic_image = pygame.image.load('game/image/mapeditimage/magnetic.png')
+    movewal_image = pygame.image.load('game/image/mapeditimage/movewal.png')
+    star_image = pygame.image.load('game/image/mapeditimage/star.png')
+    thorn_image = pygame.image.load('game/image/mapeditimage/thorn.png')
+    wall_image = pygame.image.load('game/image/mapeditimage/wall.png')
+    spring_image = pygame.image.load('game/image/mapeditimage/spring.png')
 
-    icicle_image = pygame.image.load('mapeditimage/icicle.png')
-    laser_image = pygame.image.load('mapeditimage/laser.png')
-    blinkblock_image = pygame.image.load('mapeditimage/blinkblock.png')
-    lever_image = pygame.image.load('mapeditimage/lever.png')
-    portal_image = pygame.image.load('mapeditimage/portal.png')
-    cannon_image = pygame.image.load('mapeditimage/cannon.png')
+    icicle_image = pygame.image.load('game/image/mapeditimage/icicle.png')
+    laser_image = pygame.image.load('game/image/mapeditimage/laser.png')
+    blinkblock_image = pygame.image.load('game/image/mapeditimage/blinkblock.png')
+    lever_image = pygame.image.load('game/image/mapeditimage/lever.png')
+    portal_image = pygame.image.load('game/image/mapeditimage/portal.png')
+    cannon_image = pygame.image.load('game/image/mapeditimage/cannon.png')
 
-    subportal_image = pygame.image.load('mapeditimage/subportal.png')
-    laserline_image = pygame.image.load('mapeditimage/line.png')
-    leveron_image = pygame.image.load('mapeditimage/leverON.png')
-    leveroff_image = pygame.image.load('mapeditimage/leverOFF.png')
+    subportal_image = pygame.image.load('game/image/mapeditimage/subportal.png')
+    laserline_image = pygame.image.load('game/image/mapeditimage/line.png')
+    leveron_image = pygame.image.load('game/image/mapeditimage/leverON.png')
+    leveroff_image = pygame.image.load('game/image/mapeditimage/leverOFF.png')
 
 
     while True:
@@ -95,8 +95,8 @@ def loadmap(screen, Map_name = "map.txt"):
         elif temp[0].find('magnetic') != -1:
             magnetic_list.add(Magnetic.Magnetic(magnetic_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('movewal') != -1:
-            movewal_list.add(Movewall.Movewall(movewal_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3])),\
-                                               (int(temp[5]), int(temp[6]))))
+            movewal_list.add(Movewall.Movewall(movewal_image, (int(temp[1]), int(temp[2])), (int(temp[5]), int(temp[6])),\
+                                               (int(temp[3]), int(temp[3]))))
         elif temp[0].find('star') != -1:
             star = Star.Star(star_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3])))
         elif temp[0].find('thorn') != -1:
