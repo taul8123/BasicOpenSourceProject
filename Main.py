@@ -101,13 +101,16 @@ def Start_Menu():
 
 
 def Game_Menu():
-    running = True
-    while running:
-        testmap.Map(screen)
+    running = 0
+    Life = 3
+    while Life != 0:
+        running = testmap.Map(screen)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
+        if running == -2:
+            Life -= 1
 
 
 def Setting_Menu():

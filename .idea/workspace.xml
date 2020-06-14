@@ -6,13 +6,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a33a85e7-85e5-40c2-a74b-7e1a6b59c41a" name="Default Changelist" comment="추가 및 변경사항 &#10;- mapediter 일부 수정 후 업로드&#10;- LoadMap 모든 객체 사용 가능&#10;- LoadMap &#10;- map.txt UTF-8로 인코딩&#10;-&#10;&#10;삭제&#10;- mapediter.zip 삭제&#10;-">
-      <change afterPath="$PROJECT_DIR$/.idea/hyunsadatabox.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/BouncyDungeon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BouncyDungeon.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LoadMap.py" beforeDir="false" afterPath="$PROJECT_DIR$/LoadMap.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/map.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapediter.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapeditimage/Aperture_Science_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testmap.py" beforeDir="false" afterPath="$PROJECT_DIR$/testmap.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,22 +35,24 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.Main">
     <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="hyunsadatabox" />
+      <module name="BouncyDungeon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Minwoo\Documents\GitHub\hyunsadatabox\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -63,17 +63,18 @@
       <method v="2" />
     </configuration>
     <configuration name="mapediter" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="hyunsadatabox" />
+      <module name="BouncyDungeon" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Minwoo\Documents\GitHub\hyunsadatabox\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mapediter.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
@@ -83,6 +84,10 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.Main" />
+      <item itemvalue="Python.mapediter" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.Main" />
@@ -100,6 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589635398098</updated>
+      <workItem from="1592112025303" duration="540000" />
     </task>
     <task id="LOCAL-00001" summary="객체 리스트 반환되는거 출력하는 거 지움">
       <created>1591964546576</created>
@@ -111,12 +117,17 @@
     <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -127,9 +138,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="객체 리스트 반환되는거 출력하는 거 지움" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="425" y="432" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1591964082116">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="319" y="321" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592112170697">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="319" y="321" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1592112170697" />
     <state x="425" y="432" key="#com.intellij.execution.impl.EditConfigurationsDialog/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591964082116" />
     <state x="1481" y="404" key="CommitChangelistDialog2" timestamp="1591974014824">
       <screen x="0" y="0" width="2560" height="1400" />
@@ -167,9 +179,10 @@
     <state width="1665" height="240" key="GridCell.Tab.0.right/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591974018400" />
     <state width="1663" height="240" key="GridCell.Tab.0.right/3840.1074.1920.1020/0.0.3840.2100@0.0.3840.2100" timestamp="1591964746941" />
     <state width="1663" height="240" key="GridCell.Tab.0.right/3840.1074.1920.1040/0.0.3840.2120@0.0.3840.2120" timestamp="1591965171803" />
-    <state x="727" y="438" key="SettingsEditor" timestamp="1591964233274">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="545" y="323" key="SettingsEditor" timestamp="1592112059269">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="545" y="323" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592112059269" />
     <state x="727" y="438" key="SettingsEditor/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591964233274" />
     <state x="1026" y="526" key="Vcs.Push.Dialog.v2" timestamp="1591964479071">
       <screen x="0" y="0" width="2560" height="1400" />

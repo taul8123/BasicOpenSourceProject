@@ -4,9 +4,9 @@ import LoadMap
 from game.data.obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring, Fakewall, Thorn, Ball, Wall, iccle,Laser,lever,potal,Cannon
 
 img=['wall','star','setting','Exit',"thorn","Help"]#이미지 이름
-exit=-2
+exit = -2
 
-def map(screen,k):#스크린을 전달받음
+def Map(screen,k):#스크린을 전달받음
     done = 1
     FPS = 60        #프레임
     key = k         #공의 이동 방향 0이 바뀌지 않음 1이 오른쪽, -1이 왼쪽
@@ -55,7 +55,7 @@ def map(screen,k):#스크린을 전달받음
     #충돌 감지 넣었는지 체크
     for o in Laser_list:
         if o.collision_check():
-            raise excption.LaserError()
+            raise exception.LaserError()
     for o in cannon_list:
         if o.collision_check():
             raise excption.CannonError()
@@ -255,4 +255,4 @@ def map(screen,k):#스크린을 전달받음
 
     else:
         print("클리어")
-        return exit
+        return 1
