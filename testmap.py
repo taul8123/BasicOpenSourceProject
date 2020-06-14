@@ -5,11 +5,13 @@ from game.data.obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring,
 
 img=['wall','star','setting','Exit',"thorn","Help"]#이미지 이름
 exit = -2
+die=-1
+win=1
 
-def Map(screen,k):#스크린을 전달받음
+def Map(screen):#스크린을 전달받음
     done = 1
     FPS = 60        #프레임
-    key = k         #공의 이동 방향 0이 바뀌지 않음 1이 오른쪽, -1이 왼쪽
+    key = 0         #공의 이동 방향 0이 바뀌지 않음 1이 오른쪽, -1이 왼쪽
 
     wall_list=pygame.sprite.Group()              #벽들을 모아둘 그룹
     fakewall_list=pygame.sprite.Group()          #fakewall들을 모아둘 그룹
@@ -52,7 +54,7 @@ def Map(screen,k):#스크린을 전달받음
     portal_list = list_collection[14]
     cannon_list = list_collection[15]
 
-    #충돌 감지 넣었는지 체크
+    '''#충돌 감지 넣었는지 체크
     for o in Laser_list:
         if o.collision_check():
             raise exception.LaserError()
@@ -67,7 +69,13 @@ def Map(screen,k):#스크린을 전달받음
     #여기까지
     for o in iccle_list:
         if o.collision_check():
-            raise excption.IccleError()
+            raise excption.IccleError()'''
+    keys=pygame.key.get_pressed()
+    if keys[pygame.K_LEFT]:
+        key-=1
+    if keys[pygame.K_RIGHT]:
+        key+=1
+
     while done:
         clock.tick(FPS)     #프레임 설정
 
@@ -91,40 +99,40 @@ def Map(screen,k):#스크린을 전달받음
 
         # 공이동
         if ball.move_check(key):
-            return exit
+            return die
 
         #벽과충돌
         collision_list = pygame.sprite.spritecollide(ball, wall_list, False, pygame.sprite.collide_mask)
         for wall in collision_list:
             if wall.collision(ball):
-                return exit
+                return die
 
         #기시와 충돌시 게임 오버
         collision_list = pygame.sprite.spritecollide(ball, thorn_list, False, pygame.sprite.collide_mask)
         for thorn in collision_list:
-            return exit
+            return die
 
         # 블랙홀과 충돌시 게임 오버
         collision_list = pygame.sprite.spritecollide(ball, Blckhole_list, False, pygame.sprite.collide_mask)
         for black in collision_list:
-            return exit
+            return die
 
         #자석블록과 충돌
         collision_list = pygame.sprite.spritecollide(ball, magnetic_list, False, pygame.sprite.collide_mask)
         for mag in collision_list:
             if mag.collision(ball):
-                return exit
+                return die
 
         # 재시작블록과 충돌
         collision_list = pygame.sprite.spritecollide(ball, restart_list, False, pygame.sprite.collide_mask)
         for re in collision_list:
-           return key
+           return die
 
         #fakewall과 충돌
         collision_list =pygame.sprite.spritecollide(ball,fakewall_list,True,pygame.sprite.collide_mask)
         for fake in collision_list:
             if fake.collision(ball):
-                return exit
+                return die
             fake.disappear(ball)
             fakewall_disappear_list.add(fake)
         #fakewall 재생성 확인
@@ -137,7 +145,7 @@ def Map(screen,k):#스크린을 전달받음
         collision_list=pygame.sprite.spritecollide(ball,spring_list,False,pygame.sprite.collide_mask)
         for spring in collision_list:
             if spring.spring(ball):
-                return exit
+                return die
 
         # 이동체크
         for movewall in movewall_list:
@@ -146,13 +154,13 @@ def Map(screen,k):#스크린을 전달받음
         collision_list = pygame.sprite.spritecollide(ball, movewall_list, False, pygame.sprite.collide_mask)
         for movewall in collision_list:
             if movewall.collision(ball):
-                return exit
+                return die
 
         #고드름
         #공과충돌
         collision_list = pygame.sprite.spritecollide(ball, iccle_list, False, pygame.sprite.collide_mask)
         for ice in collision_list:
-            return exit
+            return die
         #이동
         for ice in iccle_list:
             if ice.move():
@@ -170,22 +178,22 @@ def Map(screen,k):#스크린을 전달받음
             #레이저와 충돌
             collision_list = pygame.sprite.spritecollide(ball, layblock.get_subgroup(), False, pygame.sprite.collide_mask)
             for l in collision_list:
-                return exit
+                return die
         collision_list = pygame.sprite.spritecollide(ball, Laser_list, False, pygame.sprite.collide_mask)
         for layblock in collision_list:
             if layblock.collision(ball):
-                return exit
+                return die
 
         #레버블럭
         collision_list = pygame.sprite.spritecollide(ball, lever_list, False, pygame.sprite.collide_mask)
         for l in collision_list:
             if l.collision(ball):
-                return exit
+                return die
         for l in lever_list:
             collision_list = pygame.sprite.spritecollide(ball, l.block_list, False, pygame.sprite.collide_mask)
             for l in collision_list:
                 if l.collision_check(ball):
-                    return exit
+                    return die
 
         #포탈
         for p in potal_list:
@@ -198,11 +206,11 @@ def Map(screen,k):#스크린을 전달받음
             #대포알과 충돌
             collision_list = pygame.sprite.spritecollide(ball, c.get_subgroup(), False, pygame.sprite.collide_mask)
             for l in collision_list:
-                return exit
+                return die
         collision_list = pygame.sprite.spritecollide(ball, cannon_list, False, pygame.sprite.collide_mask)
         for cannon in collision_list:
             if cannon.collision(ball):
-                return exit
+                return die
 
         #깜빡이는 블럭
         for b in Blinkblock_list:
@@ -210,7 +218,7 @@ def Map(screen,k):#스크린을 전달받음
         collision_list = pygame.sprite.spritecollide(ball, Blinkblock_list, False, pygame.sprite.collide_mask)
         for b in collision_list:
             if b.collision(ball):
-                return exit
+                return die
 
 
 
@@ -254,5 +262,4 @@ def Map(screen,k):#스크린을 전달받음
         pygame.display.flip()
 
     else:
-        print("클리어")
-        return 1
+        return win

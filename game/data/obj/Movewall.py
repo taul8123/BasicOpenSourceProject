@@ -1,5 +1,5 @@
 import pygame
-from obj import Wall
+from game.data.obj import Wall
 '''속도 수정필요, 이보다 더 느리게 해야 될시 추가적인 변수로 좌포값을 따로 계산 및 저장하고 그값을 매번 집어 넣는 것이 필요'''
 
 class Movewall(Wall.Wall):
