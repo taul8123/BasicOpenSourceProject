@@ -30,7 +30,7 @@ def Map(screen):#스크린을 전달받음
     iccle_disappear_list = pygame.sprite.Group()  # 사라진 iccle들을 모아둘 그룹
     Laser_list=pygame.sprite.Group()
     lever_list=pygame.sprite.Group()
-    potal_list=pygame.sprite.Group()
+    portal_list=pygame.sprite.Group()
     cannon_list=pygame.sprite.Group()
     Blinkblock_list=pygame.sprite.Group()
 
@@ -41,9 +41,10 @@ def Map(screen):#스크린을 전달받음
     #list_collection = [backblock_list, ball, blckhole_list, fakewal_list, magnetic_list, movewal_list, star, thorn_list, wall_list\
     #        ,spring_list, icicle_list, laser_list, blinkblock_list, lever_list, portal_list, cannon_list]
     list_collection = LoadMap.loadmap(screen, 'testmap.txt') ################맵 이름 매개변수로 지정할 수 있음 default = 'map.txt'
-    backblock_list = list_collection[0]
+    restart_list = list_collection[0]
     ball = list_collection[1]
     Blckhole_list = list_collection[2]
+    print(Blckhole_list)
     fakewall_list = list_collection[3]
     magnetic_list = list_collection[4]
     movewall_list = list_collection[5]
@@ -51,11 +52,13 @@ def Map(screen):#스크린을 전달받음
     thorn_list = list_collection[7]
     wall_list = list_collection[8]
     spring_list = list_collection[9]
-    icicle_list = list_collection[10]
+    iccle_list = list_collection[10]
     laser_list = list_collection[11]
+    print(laser_list)
     blinkblock_list = list_collection[12]
     lever_list = list_collection[13]
     portal_list = list_collection[14]
+    print(portal_list)
     cannon_list = list_collection[15]
 
     '''#충돌 감지 넣었는지 체크
@@ -132,7 +135,7 @@ def Map(screen):#스크린을 전달받음
         # 재시작블록과 충돌
         collision_list = pygame.sprite.spritecollide(ball, restart_list, False, pygame.sprite.collide_mask)
         for re in collision_list:
-           return die
+           return 0
 
         #fakewall과 충돌
         collision_list =pygame.sprite.spritecollide(ball,fakewall_list,True,pygame.sprite.collide_mask)
@@ -179,7 +182,7 @@ def Map(screen):#스크린을 전달받음
                 iccle_list.add(ice)
 
         #레이저 블럭
-        for layblock in Laser_list:
+        for layblock in laser_list:
             layblock.layser()
             #레이저와 충돌
             collision_list = pygame.sprite.spritecollide(ball, layblock.get_subgroup(), False, pygame.sprite.collide_mask)
@@ -202,7 +205,7 @@ def Map(screen):#스크린을 전달받음
                     return die
 
         #포탈
-        for p in potal_list:
+        for p in portal_list:
             p.teleport(ball)
             p.return_subpotal().teleport(ball)
 
@@ -219,7 +222,7 @@ def Map(screen):#스크린을 전달받음
                 return die
 
         #깜빡이는 블럭
-        for b in Blinkblock_list:
+        for b in blinkblock_list:
             b.state()
         collision_list = pygame.sprite.spritecollide(ball, Blinkblock_list, False, pygame.sprite.collide_mask)
         for b in collision_list:
@@ -247,15 +250,15 @@ def Map(screen):#스크린을 전달받음
         restart_list.draw(background)
         Blckhole_list.draw(background)
         iccle_list.draw(background)
-        Laser_list.draw(background)
-        for l in Laser_list:
+        laser_list.draw(background)
+        for l in laser_list:
             l.draw_layser(background)
         lever_list.draw(background)
         for l in lever_list:
             l.draw_block(background)
-        potal_list.draw(background)
-        for p in potal_list:
-            p.draw_potal(background)
+        portal_list.draw(background)
+        for p in portal_list:
+            p.draw_portal(background)
         cannon_list.draw(background)
         for c in cannon_list:
             c.draw_shell(background)
