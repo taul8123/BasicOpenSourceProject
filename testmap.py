@@ -17,9 +17,8 @@ def Map(screen):#스크린을 전달받음
     FPS = 60        #프레임
     key = 0         #공의 이동 방향 0이 바뀌지 않음 1이 오른쪽, -1이 왼쪽
 
-    wall_list=pygame.sprite.Group()              #벽들을 모아둘 그룹
+    '''wall_list=pygame.sprite.Group()              #벽들을 모아둘 그룹
     fakewall_list=pygame.sprite.Group()          #fakewall들을 모아둘 그룹
-    fakewall_disappear_list=pygame.sprite.Group()#사라진 fakewall들을 모아둘 그룹
     spring_list=pygame.sprite.Group()
     movewall_list=pygame.sprite.Group()
     thorn_list=pygame.sprite.Group()
@@ -27,12 +26,11 @@ def Map(screen):#스크린을 전달받음
     restart_list=pygame.sprite.Group()
     Blckhole_list=pygame.sprite.Group()
     iccle_list=pygame.sprite.Group()
-    iccle_disappear_list = pygame.sprite.Group()  # 사라진 iccle들을 모아둘 그룹
     Laser_list=pygame.sprite.Group()
     lever_list=pygame.sprite.Group()
     portal_list=pygame.sprite.Group()
     cannon_list=pygame.sprite.Group()
-    Blinkblock_list=pygame.sprite.Group()
+    Blinkblock_list=pygame.sprite.Group()'''
 
 
     background= pygame.Surface(screen.get_size())#스크린과 동일크기의 surface생성 이곳에 그린후 스크린에 복사
@@ -44,8 +42,8 @@ def Map(screen):#스크린을 전달받음
     restart_list = list_collection[0]
     ball = list_collection[1]
     Blckhole_list = list_collection[2]
-    print(Blckhole_list)
     fakewall_list = list_collection[3]
+    fakewall_disappear_list = pygame.sprite.Group()  # 사라진 fakewall들을 모아둘 그룹
     magnetic_list = list_collection[4]
     movewall_list = list_collection[5]
     star = list_collection[6]
@@ -53,12 +51,11 @@ def Map(screen):#스크린을 전달받음
     wall_list = list_collection[8]
     spring_list = list_collection[9]
     iccle_list = list_collection[10]
+    iccle_disappear_list = pygame.sprite.Group()  # 사라진 iccle들을 모아둘 그룹
     laser_list = list_collection[11]
-    print(laser_list)
     blinkblock_list = list_collection[12]
     lever_list = list_collection[13]
     portal_list = list_collection[14]
-    print(portal_list)
     cannon_list = list_collection[15]
 
     '''#충돌 감지 넣었는지 체크
@@ -188,7 +185,7 @@ def Map(screen):#스크린을 전달받음
             collision_list = pygame.sprite.spritecollide(ball, layblock.get_subgroup(), False, pygame.sprite.collide_mask)
             for l in collision_list:
                 return die
-        collision_list = pygame.sprite.spritecollide(ball, Laser_list, False, pygame.sprite.collide_mask)
+        collision_list = pygame.sprite.spritecollide(ball, laser_list, False, pygame.sprite.collide_mask)
         for layblock in collision_list:
             if layblock.collision(ball):
                 return die
@@ -224,7 +221,7 @@ def Map(screen):#스크린을 전달받음
         #깜빡이는 블럭
         for b in blinkblock_list:
             b.state()
-        collision_list = pygame.sprite.spritecollide(ball, Blinkblock_list, False, pygame.sprite.collide_mask)
+        collision_list = pygame.sprite.spritecollide(ball, blinkblock_list, False, pygame.sprite.collide_mask)
         for b in collision_list:
             if b.collision(ball):
                 return die
@@ -263,7 +260,7 @@ def Map(screen):#스크린을 전달받음
         for c in cannon_list:
             c.draw_shell(background)
 
-        for b in Blinkblock_list:
+        for b in blinkblock_list:
             b.draw(background)
 
         #스크린에 그리고 새로고침
