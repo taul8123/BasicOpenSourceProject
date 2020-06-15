@@ -1,6 +1,8 @@
 import pygame
 
 Fall_speed=4
+width=1920
+height=1080
 
 class Iccle(pygame.sprite.Sprite):
     def __init__(self,img,location,area,FPS=60,time=5,speed=1,obj=[]):
@@ -35,6 +37,9 @@ class Iccle(pygame.sprite.Sprite):
 
     def move(self):
         '''아래로 떨어짐 만약 다른 블럭들과 부딪칠 경우 1 아닐경우 0반환'''
+        if self.rect.right < 0 or self.rect.left>width or self.rect.top>height or self.rect.bottom<0:
+            return 1
+
         for obj in self.col_obj:
             if (pygame.sprite.collide_mask(self, obj)):
                 return 1
