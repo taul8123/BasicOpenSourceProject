@@ -48,30 +48,30 @@ def loadmap(screen, Map_name = "map.txt"):
     Start_background = pygame.image.load("game/image/mapeditimage/Backgrounds/{0}".format(filename))
     print("배경 '{0}' 을(를) 로드했습니다.".format(filename))
 
-    cannonball_image = pygame.image.load('game/image/mapeditimage/cannonball.png')
+    cannonball_image = pygame.image.load('game/image/mapeditimage/cannonball.png').convert_alpha()
 
-    backblock_image = pygame.image.load('game/image/mapeditimage/move.png')
-    ball_image = pygame.image.load('game/image/mapeditimage/ball.png')
-    blckhole_image = pygame.image.load('game/image/mapeditimage/blckhole.png')
-    fakewal_image = pygame.image.load('game/image/mapeditimage/fakewal.png')
-    magnetic_image = pygame.image.load('game/image/mapeditimage/magnetic.png')
-    movewal_image = pygame.image.load('game/image/mapeditimage/movewal.png')
-    star_image = pygame.image.load('game/image/mapeditimage/star.png')
-    thorn_image = pygame.image.load('game/image/mapeditimage/thorn.png')
-    wall_image = pygame.image.load('game/image/mapeditimage/wall.png')
-    spring_image = pygame.image.load('game/image/mapeditimage/spring.png')
+    backblock_image = pygame.image.load('game/image/mapeditimage/move.png').convert_alpha()
+    ball_image = pygame.image.load('game/image/mapeditimage/ball.png').convert_alpha()
+    blckhole_image = pygame.image.load('game/image/mapeditimage/blckhole.png').convert_alpha()
+    fakewal_image = pygame.image.load('game/image/mapeditimage/fakewal.png').convert_alpha()
+    magnetic_image = pygame.image.load('game/image/mapeditimage/magnetic.png').convert_alpha()
+    movewal_image = pygame.image.load('game/image/mapeditimage/movewal.png').convert_alpha()
+    star_image = pygame.image.load('game/image/mapeditimage/star.png').convert_alpha()
+    thorn_image = pygame.image.load('game/image/mapeditimage/thorn.png').convert_alpha()
+    wall_image = pygame.image.load('game/image/mapeditimage/wall.png').convert_alpha()
+    spring_image = pygame.image.load('game/image/mapeditimage/spring.png').convert_alpha()
 
-    icicle_image = pygame.image.load('game/image/mapeditimage/icicle.png')
-    laser_image = pygame.image.load('game/image/mapeditimage/laser.png')
-    blinkblock_image = pygame.image.load('game/image/mapeditimage/blinkblock.png')
-    lever_image = pygame.image.load('game/image/mapeditimage/lever.png')
-    portal_image = pygame.image.load('game/image/mapeditimage/portal.png')
-    cannon_image = pygame.image.load('game/image/mapeditimage/cannon.png')
+    icicle_image = pygame.image.load('game/image/mapeditimage/icicle.png').convert_alpha()
+    laser_image = pygame.image.load('game/image/mapeditimage/laser.png').convert_alpha()
+    blinkblock_image = pygame.image.load('game/image/mapeditimage/blinkblock.png').convert_alpha()
+    lever_image = pygame.image.load('game/image/mapeditimage/lever.png').convert_alpha()
+    portal_image = pygame.image.load('game/image/mapeditimage/portal.png').convert_alpha()
+    cannon_image = pygame.image.load('game/image/mapeditimage/cannon.png').convert_alpha()
 
-    subportal_image = pygame.image.load('game/image/mapeditimage/subportal.png')
-    laserline_image = pygame.image.load('game/image/mapeditimage/line.png')
-    leveron_image = pygame.image.load('game/image/mapeditimage/leverON.png')
-    leveroff_image = pygame.image.load('game/image/mapeditimage/leverOFF.png')
+    subportal_image = pygame.image.load('game/image/mapeditimage/subportal.png').convert_alpha()
+    laserline_image = pygame.image.load('game/image/mapeditimage/line.png').convert_alpha()
+    leveron_image = pygame.image.load('game/image/mapeditimage/leverON.png').convert_alpha()
+    leveroff_image = pygame.image.load('game/image/mapeditimage/leverOFF.png').convert_alpha()
 
 
     while True:
@@ -89,7 +89,7 @@ def loadmap(screen, Map_name = "map.txt"):
         elif temp[0].find('ball') != -1:
             ball = Ball.Ball(ball_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3])))
         elif temp[0].find('blckhole') != -1:
-            blckhole_list.add(Thorn.Thorn(blckhole_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
+            blckhole_list.add(Blckhole.Blackhole(blckhole_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('fakewal') != -1:
             fakewal_list.add(Fakewall.Fakewall(fakewal_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('magnetic') != -1:
@@ -117,7 +117,7 @@ def loadmap(screen, Map_name = "map.txt"):
         elif temp[0].find('lever') != -1:
             lever_list.add(lever.Lever(lever_image, (leveron_image, leveroff_image), (int(temp[1]), int(temp[2])), [(int(temp[5]), int(temp[6]))], (int(temp[3]), int(temp[3]))))
         elif temp[0].find('portal') != -1:
-            portal_list.add(potal.Potal(portal_image, subportal_image, (int(temp[1]), int(temp[2])), (int(temp[5]), int(temp[6])),\
+            portal_list.add(potal.Potal(portal_image, subportal_image, (int(temp[1]), int(temp[2])), (int(temp[4]), int(temp[5])),\
                                         (int(temp[3]), int(temp[3]))))
         elif temp[0].find('cannon') != -1:
             cannon_list.add(Cannon.Cannon(cannon_image, cannonball_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
