@@ -89,7 +89,7 @@ def loadmap(screen, Map_name = "map.txt"):
         elif temp[0].find('ball') != -1:
             ball = Ball.Ball(ball_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3])))
         elif temp[0].find('blckhole') != -1:
-            blckhole_list.add(Blckhole.Blackhole(blckhole_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
+            blckhole_list.add(Thorn.Thorn(blckhole_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('fakewal') != -1:
             fakewal_list.add(Fakewall.Fakewall(fakewal_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('magnetic') != -1:
@@ -117,7 +117,7 @@ def loadmap(screen, Map_name = "map.txt"):
         elif temp[0].find('lever') != -1:
             lever_list.add(lever.Lever(lever_image, (leveron_image, leveroff_image), (int(temp[1]), int(temp[2])), [(int(temp[5]), int(temp[6]))], (int(temp[3]), int(temp[3]))))
         elif temp[0].find('portal') != -1:
-            portal_list.add(potal.Potal(portal_image, subportal_image, (int(temp[1]), int(temp[2])), (int(temp[4]), int(temp[5])),\
+            portal_list.add(potal.Potal(portal_image, subportal_image, (int(temp[1]), int(temp[2])), (int(temp[5]), int(temp[6])),\
                                         (int(temp[3]), int(temp[3]))))
         elif temp[0].find('cannon') != -1:
             cannon_list.add(Cannon.Cannon(cannon_image, cannonball_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
