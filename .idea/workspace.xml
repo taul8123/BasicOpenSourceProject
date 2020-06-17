@@ -5,13 +5,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33a85e7-85e5-40c2-a74b-7e1a6b59c41a" name="Default Changelist" comment="추가 및 변경사항 &#10;- mapediter 일부 수정 후 업로드&#10;- LoadMap 모든 객체 사용 가능&#10;- LoadMap &#10;- map.txt UTF-8로 인코딩&#10;-&#10;&#10;삭제&#10;- mapediter.zip 삭제&#10;-">
-      <change beforePath="$PROJECT_DIR$/.idea/BouncyDungeon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BouncyDungeon.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testmap.py" beforeDir="false" afterPath="$PROJECT_DIR$/testmap.py" afterDir="false" />
-    </list>
+    <list default="true" id="a33a85e7-85e5-40c2-a74b-7e1a6b59c41a" name="Default Changelist" comment="추가 및 변경사항 &#10;- mapediter 일부 수정 후 업로드&#10;- LoadMap 모든 객체 사용 가능&#10;- LoadMap &#10;- map.txt UTF-8로 인코딩&#10;-&#10;&#10;삭제&#10;- mapediter.zip 삭제&#10;-" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,6 +100,7 @@
       <option name="presentableId" value="Default" />
       <updated>1589635398098</updated>
       <workItem from="1592112025303" duration="540000" />
+      <workItem from="1592373022311" duration="1000" />
     </task>
     <task id="LOCAL-00001" summary="객체 리스트 반환되는거 출력하는 거 지움">
       <created>1591964546576</created>
