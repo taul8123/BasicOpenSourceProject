@@ -40,7 +40,7 @@ Chk = pygame.image.load("game/image/Chk.png")
 Chk_2 = pygame.image.load("game/image/Chk.png")
 Chk_Box = pygame.image.load("game/image/Chk_Box.png")
 Click_Sound = pygame.mixer.Sound("game/audio/click.wav")
-die_sound=pygame.mixer.Sound("game/audio/diesound.wav")
+die_sound = pygame.mixer.Sound("game/audio/diesound.wav")
 
 class button():
     def __init__(self, x, y, width, height):
@@ -64,7 +64,7 @@ exit_button = button(1300, 880, 481, 110)
 
 # Here is Main
 def Start_Menu():
-    pygame.mixer.music.load('game/audio/Main-bgm.mp3')
+    pygame.mixer.music.load('game/audio/Main_bgm.mp3')
     pygame.mixer.music.play(-1)
     while True:
         screen.blit(Start_background, (0, 0))
@@ -103,9 +103,9 @@ def Start_Menu():
 
 def Game_Menu():
     running = 0
-    Life = 3
+    Life = 4
     while Life != 0:
-        running = testmap.Map(screen)
+        running = testmap.Map(screen, Life)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -114,10 +114,10 @@ def Game_Menu():
             die_sound.play()
             pygame.time.delay(250)
             Life -= 1
-        elif running==-2 or running==1:
+        elif running == -2 or running == 1:
             break
 
-    if Life==0:
+    if Life == 0:
         print("gameover")
     elif running ==1:
         print("클리어")

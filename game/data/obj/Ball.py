@@ -6,7 +6,7 @@ width=1920
 height=1080
 
 pygame.mixer.init()
-ballsound=pygame.mixer.Sound('game/audio/51460__andre-nascimento__basket-ball-01-bounce.wav')
+ballsound=pygame.mixer.Sound('game/audio/tick.wav')
 ballsound.set_volume(0.5)
 
 def to_Zero(num):
