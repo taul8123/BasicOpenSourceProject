@@ -14,7 +14,7 @@ config.read(configFilePath)
 FullToggle = config.get("Setting", "Fullscreen_Toggle")
 SoundToggle = config.get("Setting", "Sound")
 ScoreToggle = config.get("Setting", "Display_Score")
-Sensitive = config.get("Setting", "Sensitive")
+Frame = config.get("Setting", "Frame")
 
 # Pygame Initialize
 pygame.init()
@@ -39,6 +39,7 @@ Setting_Screen = pygame.image.load("game/image/Setting_Screen.png")
 Chk = pygame.image.load("game/image/Chk.png")
 Chk_2 = pygame.image.load("game/image/Chk.png")
 Chk_Box = pygame.image.load("game/image/Chk_Box.png")
+hidden_content = pygame.image.load("game/image/hidden_content.png")
 Click_Sound = pygame.mixer.Sound("game/audio/click.wav")
 die_sound = pygame.mixer.Sound("game/audio/diesound.wav")
 
@@ -64,23 +65,18 @@ exit_button = button(1300, 880, 481, 110)
 
 # Here is Main
 def Start_Menu():
-    pygame.mixer.music.load('game/audio/Main_bgm.mp3')
-    pygame.mixer.music.play(-1)
+    #pygame.mixer.music.load('game/audio/Main_bgm.mp3')
+    #pygame.mixer.music.play(-1)
     while True:
-        screen.blit(Start_background, (0, 0))
-        screen.blit(Setting_Button, (1770, 20))
-        screen.blit(Help_Button, (1680, 20))
-        screen.blit(Start_Button, (1240, 540))
-        screen.blit(Score_Button, (1240, 715))
-        screen.blit(Exit_Button, (1300, 880))
+        show_screen()
         for event in pygame.event.get():
             pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if s_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    pygame.mixer.music.pause()
+                    #pygame.mixer.music.pause()
                     Game_Menu()
-                    pygame.mixer.music.unpause()
+                    #pygame.mixer.music.unpause()
                 if setting_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Setting_Menu()
@@ -127,45 +123,62 @@ def Setting_Menu():
     screen.blit(Setting_Screen, (0,0))
     Sound_Button = button(625, 335, 75, 75)
     Score_Button = button(970, 475, 75, 75)
-    Sensitive_LOW_Button = button(780, 600, 160, 80)
-    Sensitive_MID_Button = button(1065, 600, 160, 80)
-    Sensitive_HIGH_Button = button(1380, 600, 160, 80)
+    Frame_LOW_Button = button(780, 600, 160, 80)
+    Frame_MID_Button = button(1065, 600, 160, 80)
+    Frame_HIGH_Button = button(1380, 600, 160, 80)
 
     while running:
+        global SoundToggle
+        global ScoreToggle
+        global Frame
         if SoundToggle == "True":
             screen.blit(Chk, (600, 320))
+        else:
+            screen.blit(Chk, (width, height))
         if ScoreToggle == "True":
             screen.blit(Chk_2, (945, 460))
-        if Sensitive == "Low":
+        else:
+            screen.blit(Chk_2, (width, height))
+        if Frame == "Low":
             screen.blit(Chk_Box, (775, 600))
-        if Sensitive == "Mid":
+        if Frame == "Mid":
             screen.blit(Chk_Box, (1060, 600))
-        if Sensitive == "High":
+        if Frame == "High":
             screen.blit(Chk_Box, (1375, 600))
+
         for event in pygame.event.get():
             pos = pygame.mouse.get_pos()
             if event.type == pygame.MOUSEBUTTONDOWN:
+                show_screen()
+                screen.blit(Setting_Screen, (0, 0))
                 if Sound_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     if SoundToggle == "False":
                         config.set("Setting", "Sound", "True")
+                        SoundToggle = "True"
                     else:
+                        SoundToggle = "False"
                         config.set("Setting", "Sound", "False")
                 if Score_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     if ScoreToggle == "False":
+                        ScoreToggle = "True"
                         config.set("Setting", "Display_Score", "True")
                     else:
+                        ScoreToggle = "False"
                         config.set("Setting", "Display_Score", "False")
-                if Sensitive_LOW_Button.isOver(pos):
+                if Frame_LOW_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    config.set("Setting", "Sensitive", "Low")
-                if Sensitive_MID_Button.isOver(pos):
+                    Frame = "Low"
+                    config.set("Setting", "Frame", "Low")
+                if Frame_MID_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    config.set("Setting", "Sensitive", "Mid")
-                if Sensitive_HIGH_Button.isOver(pos):
+                    Frame = "Mid"
+                    config.set("Setting", "Frame", "Mid")
+                if Frame_HIGH_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    config.set("Setting", "Sensitive", "High")
+                    Frame = "High"
+                    config.set("Setting", "Frame", "High")
                 ConfigFile = open('game/data/Setting.cfg', 'w')
                 config.write(ConfigFile)
                 ConfigFile.close()
@@ -213,11 +226,26 @@ def Score_Menu():
 
 def Help_Menu():
     running = True
+    screen.blit(Gray_Background, (0, 0))
     while running:
+        screen.blit(hidden_content, (225, 225))
+        screen.blit(hidden_content, (225, 570))
+        pygame.display.flip()
         for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    running = 0
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
+
+def show_screen():
+    screen.blit(Start_background, (0, 0))
+    screen.blit(Setting_Button, (1770, 20))
+    screen.blit(Help_Button, (1680, 20))
+    screen.blit(Start_Button, (1240, 540))
+    screen.blit(Score_Button, (1240, 715))
+    screen.blit(Exit_Button, (1300, 880))
 
 Start_Menu()
