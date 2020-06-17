@@ -101,6 +101,7 @@ class Ball(pygame.sprite.Sprite):
     def speed_set_y(self,s):
         '''y축 속도 변경'''
         self.speed[1]=s
+        ballsound.play()
 
     def speed_set_x(self,s):
         '''x축 속도 변경'''

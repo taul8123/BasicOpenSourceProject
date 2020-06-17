@@ -20,3 +20,6 @@ class Fakewall(Wall.Wall):      #Wall상속
             self.frame_counter-=1
             return 0
         return 1
+
+    def setFPS(self, FPS):
+        self.FPS = FPS

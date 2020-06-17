@@ -63,7 +63,6 @@ def Map(screen, Life):#스크린을 전달받음
     blinkblock_list = list_collection[12]
     lever_list = list_collection[13]
     portal_list = list_collection[14]
-    print(portal_list)
     cannon_list = list_collection[15]
 
     '''#충돌 감지 넣었는지 체크
@@ -260,9 +259,8 @@ def Map(screen, Life):#스크린을 전달받음
         lever_list.draw(background)
         for l in lever_list:
             l.draw_block(background)
-        portal_list.draw(background)
         for p in portal_list:
-            p.draw_portal(background)
+            p.draw_portal(background) #이걸로 포탈을 둘다 그림
         cannon_list.draw(background)
         for c in cannon_list:
             c.draw_shell(background)

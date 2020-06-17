@@ -57,7 +57,9 @@ class Potal(pygame.sprite.Sprite):
 
 
     def draw_portal(self,background):
-        background.blit(self.potal.image,self.potal.rect)
+        if self.stopframe[0]==0: #포탈 이동 후는 안보이게
+            background.blit(self.image,self.rect)
+            background.blit(self.potal.image,self.potal.rect)
 
     def teleport(self,ball):
         '''이동할 곳에  다른 객체가 존재할 경우 겹쳐지는 문제 발생'''

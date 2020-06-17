@@ -72,3 +72,6 @@ class Iccle(pygame.sprite.Sprite):
         if not self.col_obj:
             return -1
         return 0
+
+    def setFPS(self,FPS):
+        self.FPS=FPS

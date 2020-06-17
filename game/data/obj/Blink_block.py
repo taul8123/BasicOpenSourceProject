@@ -54,3 +54,4 @@ class block(pygame.sprite.Sprite):
         #보일시만 출력
         if not self.invisible:
             background.blit(self.image,self.rect)
+
