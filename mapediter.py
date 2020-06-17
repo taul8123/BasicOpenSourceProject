@@ -56,8 +56,8 @@ CreateCannon = 16
 # 아래는 수정할 수 있는 변수들 입니다.
 # !!!!!!!!!!!!!맵의 경우 "확장자"를 꼭 포함하여 적어주세요!!!!!!!!!!!!!!!!!!!
 pixel_size = 40
-OpenFile = "testmap.txt"
-SaveFile = "testmap.txt"
+OpenFile = "test_map.txt"
+SaveFile = "test_map.txt"
 ################################################################
 
 display = []
@@ -80,7 +80,7 @@ except:
     label4.pack()
     window.mainloop()
     direct = filename.split('/')
-    shutil.copy(filename, 'game/data/mapeditimage/Backgrounds/{0}'.format(direct[-1]))
+    shutil.copy(filename, 'game/image/mapeditimage/Backgrounds/{0}'.format(direct[-1]))
     filename = direct[-1]
 
     for i in range(width // pixel_size):
