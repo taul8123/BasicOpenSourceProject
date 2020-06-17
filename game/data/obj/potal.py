@@ -58,7 +58,7 @@ class Potal(pygame.sprite.Sprite):
     def return_subpotal(self):
         return self.potal
 
-    def draw_potal(self,background):
+    def draw_portal(self,background):
         background.blit(self.potal.image,self.potal.rect)
 
     def teleport(self,ball):

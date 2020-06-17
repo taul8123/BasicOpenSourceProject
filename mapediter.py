@@ -56,14 +56,14 @@ CreateCannon = 16
 # 아래는 수정할 수 있는 변수들 입니다.
 # !!!!!!!!!!!!!맵의 경우 "확장자"를 꼭 포함하여 적어주세요!!!!!!!!!!!!!!!!!!!
 pixel_size = 40
-OpenFile = "map.txt"
-SaveFile = "map.txt"
+OpenFile = "testmap.txt"
+SaveFile = "testmap.txt"
 ################################################################
 
 display = []
 movepos = []
 try:
-    f = open(OpenFile, 'r', encoding='UTF8')
+    f = open('game/data/maps/{0}'.format(OpenFile), 'r', encoding='UTF8')
 except:
     window = Tk()
     window.title("배경이미지 선택")
@@ -80,7 +80,7 @@ except:
     label4.pack()
     window.mainloop()
     direct = filename.split('/')
-    shutil.copy(filename, './mapeditimage/{0}'.format(direct[-1]))
+    shutil.copy(filename, 'game/data/mapeditimage/Backgrounds/{0}'.format(direct[-1]))
     filename = direct[-1]
 
     for i in range(width // pixel_size):
@@ -108,36 +108,36 @@ else:
 pygame.init()
 screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
 
-Start_background = pygame.image.load("mapeditimage/{0}".format(filename))
-default_toolbox = pygame.image.load('mapeditimage/toolbox.png')
-default_move = pygame.image.load('mapeditimage/move.png')
-default_eraser = pygame.image.load('mapeditimage/eraser.png')
-default_select = pygame.image.load('mapeditimage/select.png')
-default_xmark = pygame.image.load('mapeditimage/xmark.png')
+Start_background = pygame.image.load("game/image/mapeditimage/Backgrounds/{0}".format(filename))
+default_toolbox = pygame.image.load('game/image/mapeditimage/toolbox.png')
+default_move = pygame.image.load('game/image/mapeditimage/move.png')
+default_eraser = pygame.image.load('game/image/mapeditimage/eraser.png')
+default_select = pygame.image.load('game/image/mapeditimage/select.png')
+default_xmark = pygame.image.load('game/image/mapeditimage/xmark.png')
 
-default_blackdot = pygame.image.load('mapeditimage/blackdot.png')
+default_blackdot = pygame.image.load('game/image/mapeditimage/blackdot.png')
 
-default_subportal = pygame.image.load('mapeditimage/subportal.png')
-default_leverOnOff = pygame.image.load('mapeditimage/leverOn.png')
+default_subportal = pygame.image.load('game/image/mapeditimage/subportal.png')
+default_leverOnOff = pygame.image.load('game/image/mapeditimage/leverOn.png')
 
-default_backblock = pygame.image.load('mapeditimage/backblock.png')
-default_ball = pygame.image.load('mapeditimage/ball.png')
-default_blckhole = pygame.image.load('mapeditimage/blckhole.png')
-default_fakewal = pygame.image.load('mapeditimage/fakewal.png')
-default_magnetic = pygame.image.load('mapeditimage/magnetic.png')
-default_movewal = pygame.image.load('mapeditimage/movewal.png')
-default_star = pygame.image.load('mapeditimage/star.png')
-default_thorn = pygame.image.load('mapeditimage/thorn.png')
-default_wall = pygame.image.load('mapeditimage/wall.png')
-default_spring = pygame.image.load('mapeditimage/spring.png')
-default_icicle = pygame.image.load('mapeditimage/icicle.png')
-default_laser = pygame.image.load('mapeditimage/laser.png')
-default_endpoint = pygame.image.load('mapeditimage/endpoint.png')
+default_backblock = pygame.image.load('game/image/mapeditimage/backblock.png')
+default_ball = pygame.image.load('game/image/mapeditimage/ball.png')
+default_blckhole = pygame.image.load('game/image/mapeditimage/blckhole.png')
+default_fakewal = pygame.image.load('game/image/mapeditimage/fakewal.png')
+default_magnetic = pygame.image.load('game/image/mapeditimage/magnetic.png')
+default_movewal = pygame.image.load('game/image/mapeditimage/movewal.png')
+default_star = pygame.image.load('game/image/mapeditimage/star.png')
+default_thorn = pygame.image.load('game/image/mapeditimage/thorn.png')
+default_wall = pygame.image.load('game/image/mapeditimage/wall.png')
+default_spring = pygame.image.load('game/image/mapeditimage/spring.png')
+default_icicle = pygame.image.load('game/image/mapeditimage/icicle.png')
+default_laser = pygame.image.load('game/image/mapeditimage/laser.png')
+default_endpoint = pygame.image.load('game/image/mapeditimage/endpoint.png')
 
-default_blinkblock = pygame.image.load('mapeditimage/blinkblock.png')
-default_lever = pygame.image.load('mapeditimage/lever.png')
-default_portal = pygame.image.load('mapeditimage/portal.png')
-default_cannon = pygame.image.load('mapeditimage/cannon.png')
+default_blinkblock = pygame.image.load('game/image/mapeditimage/blinkblock.png')
+default_lever = pygame.image.load('game/image/mapeditimage/lever.png')
+default_portal = pygame.image.load('game/image/mapeditimage/portal.png')
+default_cannon = pygame.image.load('game/image/mapeditimage/cannon.png')
 
 class newicon():
     def __init__(self, x, y, blocktype, width, height):
@@ -196,7 +196,7 @@ xmark = newicon(-pixel_size, -pixel_size, "xmark", pixel_size, pixel_size)
 
 blackdot = newicon(-pixel_size, -pixel_size, "blackdot", pixel_size, pixel_size)
 
-subportal = newicon(-pixel_size, -pixel_size, "subportal", pixel_size, pixel_size)
+subportal = newicon(-pixel_size, -pixel_size, "subpotal", pixel_size, pixel_size)
 levon = newicon(-pixel_size, -pixel_size, "levon", pixel_size, pixel_size)
 
 backblock = newicon(toolbox.x + pixel_size*1, toolbox.y, "backblock", pixel_size, pixel_size)
@@ -257,7 +257,7 @@ while True:
                     screen.blit(default_icicle, (i * pixel_size, j * pixel_size))
                 elif display[i][j].find('laser') != -1:
                     screen.blit(default_laser, (i * pixel_size, j * pixel_size))
-                elif display[i][j].find('subportal') != -1:
+                elif display[i][j].find('subpotal') != -1:
                     screen.blit(default_subportal, (i * pixel_size, j * pixel_size))
                 elif display[i][j].find('blinkblock') != -1:
                     screen.blit(default_blinkblock, (i * pixel_size, j * pixel_size))
@@ -304,7 +304,7 @@ while True:
 
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_ESCAPE:
-                f = open(SaveFile, 'w', encoding='UTF8')
+                f = open('game/data/maps/{0}'.format(SaveFile), 'w', encoding='UTF8')
                 save = str(width) + " " + str(height) + " " + str(pixel_size) + "\n"
                 f.write(save)
                 f.write(filename + "\n")
@@ -384,7 +384,7 @@ while True:
                 print(movepos)
                 CheckCode = MoveLeverOn
 
-            elif display[pos[0] // pixel_size][pos[1] // pixel_size].find('subportal') != -1:
+            elif display[pos[0] // pixel_size][pos[1] // pixel_size].find('subpotal') != -1:
                 print(display[pos[0] // pixel_size][pos[1] // pixel_size])
                 print(pos)
                 movepos = [pos[0], pos[1]]
@@ -421,7 +421,7 @@ while True:
         if CheckCode == 0 and event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             x, y = pos[0]//pixel_size, pos[1]//pixel_size
             if display[x][y].find('movewal') != -1 or display[x][y].find('endpoint') != -1\
-                    or display[x][y].find('portal') != -1 or display[x][y].find('subportal') != -1\
+                    or display[x][y].find('portal') != -1 or display[x][y].find('subpotal') != -1\
                     or display[x][y].find('lever') != -1 or display[x][y].find('levon') != -1:
                 point = display[x][y].split(' ')
                 display[x][y] = "0\n"
@@ -519,7 +519,7 @@ while True:
                 continue
             display[x][y] = "portal" + " " + str(x*pixel_size) + " " + str(y*pixel_size) + " " + str(pixel_size)\
                             + " " + "0" + " " + str((x+1)*pixel_size) + " " + str(y*pixel_size) + "\n"
-            display[x+1][y] = "subportal" + " " + str((x+1)*pixel_size) + " " + str(y*pixel_size) + " " + str(pixel_size)\
+            display[x+1][y] = "subpotal" + " " + str((x+1)*pixel_size) + " " + str(y*pixel_size) + " " + str(pixel_size)\
                             + " " + "0" + " " + str(x*pixel_size) + " " + str(y*pixel_size) + "\n"
 
         elif CheckCode == 16 and event.type == pygame.MOUSEBUTTONUP and event.button == 1:
@@ -557,7 +557,7 @@ while True:
             endp = display[a][b].split(' ')
             startp = display[int(endp[5])//pixel_size][int(endp[6])//pixel_size].split(' ')
             display[a][b] = "0\n"
-            display[x][y] = "subportal" + " " + str(x*pixel_size) + " " + str(y*pixel_size) + " " + str(pixel_size)\
+            display[x][y] = "subpotal" + " " + str(x*pixel_size) + " " + str(y*pixel_size) + " " + str(pixel_size)\
                             + " " + "0" + " " + str(startp[1]) + " " + str(startp[2]) + "\n"
             display[int(endp[5])//pixel_size][int(endp[6])//pixel_size] = "portal" + " " + str(startp[1]) + " " + str(startp[2]) + " " + str(pixel_size)\
                             + " " + "0" + " " + str(x*pixel_size) + " " + str(y*pixel_size) + "\n"
@@ -566,7 +566,7 @@ while True:
         elif event.type == pygame.MOUSEBUTTONUP and event.button == 3:
             x, y = pos[0] // pixel_size, pos[1] // pixel_size
             if display[x][y].find('movewal') != -1 or display[x][y].find('endpoint') != -1 \
-                    or display[x][y].find('portal') != -1 or display[x][y].find('subportal') != -1\
+                    or display[x][y].find('portal') != -1 or display[x][y].find('subpotal') != -1\
                     or display[x][y].find('lever') != -1 or display[x][y].find('levon') != -1:
                 point = display[x][y].split(' ')
                 display[x][y] = "0\n"
