@@ -1,8 +1,6 @@
 # Bouncy Dungeon Tech-alpha 0.1
 import pygame, sys, os, configparser, testmap
-from pygame.locals import *
-
-
+from game.data import SaveScore
 
 # Setting before Main
 mainClock = pygame.time.Clock()
@@ -115,8 +113,17 @@ def Game_Menu():
 
     if Life == 0:
         print("gameover")
+        newscore = 597
+        newname = SaveScore.get_name(screen)
+        SaveScore.save_new_score(newscore, newname)
+        Score_Menu()
+
     elif running ==1:
         print("클리어")
+        newscore = 597
+        newname = SaveScore.get_name(screen)
+        SaveScore.save_new_score(newscore, newname)
+        Score_Menu()
 
 def Setting_Menu():
     running = True
@@ -198,8 +205,8 @@ def Score_Menu():
     textwidth = width // 2 - 250
     while running:
         f = open('game/data/rank.txt', 'r')
-        textheight = height / 2 - 160
-        textwidth = width / 2 - 250
+        textheight = height // 2 - 160
+        textwidth = width // 2 - 250
         while True:
             line = f.readline()
             if not line:
