@@ -8,17 +8,11 @@ exit = -2
 die=-1
 win=1
 
-battery_0 = pygame.image.load("game/image/Battery_0.png")
-battery_1 = pygame.image.load("game/image/Battery_1.png")
-battery_2 = pygame.image.load("game/image/Battery_2.png")
-battery_3 = pygame.image.load("game/image/Battery_3.png")
-battery_4 = pygame.image.load("game/image/Battery_4.png")
-
 def menu():
     print("메뉴")
     return 1
 
-def Map(screen, Life):#스크린을 전달받음
+def Map(screen):#스크린을 전달받음
     done = 1
     FPS = 60        #프레임
     key = 0         #공의 이동 방향 0이 바뀌지 않음 1이 오른쪽, -1이 왼쪽
@@ -62,6 +56,7 @@ def Map(screen, Life):#스크린을 전달받음
     blinkblock_list = list_collection[12]
     lever_list = list_collection[13]
     portal_list = list_collection[14]
+    print(portal_list)
     cannon_list = list_collection[15]
 
     '''#충돌 감지 넣었는지 체크
@@ -210,7 +205,6 @@ def Map(screen, Life):#스크린을 전달받음
         #포탈
         for p in portal_list:
             p.teleport(ball)
-            p.return_subpotal().teleport(ball)
 
         #대포
         for c in cannon_list:
@@ -233,10 +227,12 @@ def Map(screen, Life):#스크린을 전달받음
                 return die
 
 
+
+
+
         #클리어 체크
         if(pygame.sprite.collide_mask(ball,star)):
             done = 0
-
 
         #백르라운드에 그리기
         background.fill((255,255,255))                #그려진거 비우기
@@ -266,16 +262,6 @@ def Map(screen, Life):#스크린을 전달받음
 
         for b in blinkblock_list:
             b.draw(background)
-        if Life == 0:
-            background.blit(battery_0, (20, 10))
-        elif Life == 1:
-            background.blit(battery_1, (20, 10))
-        elif Life == 2:
-            background.blit(battery_2, (20, 10))
-        elif Life == 3:
-            background.blit(battery_3, (20, 10))
-        elif Life == 4:
-            background.blit(battery_4, (20, 10))
 
         #스크린에 그리고 새로고침
         screen.blit(background,(0,0))
