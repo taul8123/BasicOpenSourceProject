@@ -5,13 +5,8 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a33a85e7-85e5-40c2-a74b-7e1a6b59c41a" name="Default Changelist" comment="추가 및 변경사항 &#10;- mapediter 일부 수정 후 업로드&#10;- LoadMap 모든 객체 사용 가능&#10;- LoadMap &#10;- map.txt UTF-8로 인코딩&#10;-&#10;&#10;삭제&#10;- mapediter.zip 삭제&#10;-">
-      <change beforePath="$PROJECT_DIR$/.idea/BouncyDungeon.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/BouncyDungeon.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a33a85e7-85e5-40c2-a74b-7e1a6b59c41a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/Main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/game/data/maps/testmap.txt" beforeDir="false" afterPath="$PROJECT_DIR$/game/data/maps/testmap.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mapediter.py" beforeDir="false" afterPath="$PROJECT_DIR$/mapediter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1591964546576</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="- mapediter 경로 수정">
+      <created>1592377756679</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1592377756679</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -136,7 +138,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="객체 리스트 반환되는거 출력하는 거 지움" />
     <MESSAGE value="LoadMap.py- portal 변경" />
-    <option name="LAST_COMMIT_MESSAGE" value="LoadMap.py- portal 변경" />
+    <MESSAGE value="- mapediter 경로 수정" />
+    <option name="LAST_COMMIT_MESSAGE" value="- mapediter 경로 수정" />
   </component>
   <component name="WindowStateProjectService">
     <state x="319" y="321" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592112170697">
@@ -148,9 +151,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="1063" y="321" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1592374980362" />
-    <state x="1481" y="404" key="CommitChangelistDialog2" timestamp="1591974014824">
-      <screen x="0" y="0" width="2560" height="1400" />
+    <state x="1111" y="0" key="CommitChangelistDialog2" timestamp="1592377755768">
+      <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="1111" y="0" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1592377755768" />
     <state x="1481" y="404" key="CommitChangelistDialog2/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591974014824" />
     <state x="1141" y="399" key="FileChooserDialogImpl" timestamp="1591964413351">
       <screen x="0" y="0" width="2560" height="1400" />
@@ -160,31 +164,31 @@
       <screen x="0" y="0" width="2560" height="1400" />
     </state>
     <state x="1075" y="511" key="Github.CreatePullRequestDialog/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591962827265" />
-    <state width="1235" height="243" key="GridCell.Tab.0.bottom" timestamp="1592377661263">
+    <state width="1235" height="243" key="GridCell.Tab.0.bottom" timestamp="1592377842340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1235" height="243" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592377661263" />
+    <state width="1235" height="243" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1592377842340" />
     <state width="1665" height="240" key="GridCell.Tab.0.bottom/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591974018400" />
     <state width="1663" height="240" key="GridCell.Tab.0.bottom/3840.1074.1920.1020/0.0.3840.2100@0.0.3840.2100" timestamp="1591964746942" />
     <state width="1663" height="240" key="GridCell.Tab.0.bottom/3840.1074.1920.1040/0.0.3840.2120@0.0.3840.2120" timestamp="1591965171803" />
-    <state width="1235" height="243" key="GridCell.Tab.0.center" timestamp="1592377661263">
+    <state width="1235" height="243" key="GridCell.Tab.0.center" timestamp="1592377842340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1235" height="243" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592377661263" />
+    <state width="1235" height="243" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1592377842340" />
     <state width="1665" height="240" key="GridCell.Tab.0.center/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591974018400" />
     <state width="1663" height="240" key="GridCell.Tab.0.center/3840.1074.1920.1020/0.0.3840.2100@0.0.3840.2100" timestamp="1591964746941" />
     <state width="1663" height="240" key="GridCell.Tab.0.center/3840.1074.1920.1040/0.0.3840.2120@0.0.3840.2120" timestamp="1591965171803" />
-    <state width="1235" height="243" key="GridCell.Tab.0.left" timestamp="1592377661263">
+    <state width="1235" height="243" key="GridCell.Tab.0.left" timestamp="1592377842340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1235" height="243" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592377661263" />
+    <state width="1235" height="243" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1592377842340" />
     <state width="1665" height="240" key="GridCell.Tab.0.left/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591974018400" />
     <state width="1663" height="240" key="GridCell.Tab.0.left/3840.1074.1920.1020/0.0.3840.2100@0.0.3840.2100" timestamp="1591964746941" />
     <state width="1663" height="240" key="GridCell.Tab.0.left/3840.1074.1920.1040/0.0.3840.2120@0.0.3840.2120" timestamp="1591965171803" />
-    <state width="1235" height="243" key="GridCell.Tab.0.right" timestamp="1592377661263">
+    <state width="1235" height="243" key="GridCell.Tab.0.right" timestamp="1592377842340">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1235" height="243" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592377661263" />
+    <state width="1235" height="243" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1592377842340" />
     <state width="1665" height="240" key="GridCell.Tab.0.right/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591974018400" />
     <state width="1663" height="240" key="GridCell.Tab.0.right/3840.1074.1920.1020/0.0.3840.2100@0.0.3840.2100" timestamp="1591964746941" />
     <state width="1663" height="240" key="GridCell.Tab.0.right/3840.1074.1920.1040/0.0.3840.2120@0.0.3840.2120" timestamp="1591965171803" />
@@ -193,10 +197,10 @@
     </state>
     <state x="545" y="323" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1592112059269" />
     <state x="727" y="438" key="SettingsEditor/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591964233274" />
-    <state x="490" y="226" key="Vcs.Push.Dialog.v2" timestamp="1592374097686">
+    <state x="490" y="226" key="Vcs.Push.Dialog.v2" timestamp="1592377774608">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="490" y="226" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592374097686" />
+    <state x="490" y="226" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1592377774608" />
     <state x="1026" y="526" key="Vcs.Push.Dialog.v2/3840.1074.1920.1020/0.0.2560.1400@0.0.2560.1400" timestamp="1591964479071" />
     <state x="541" y="707" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1591963270687">
       <screen x="0" y="0" width="2560" height="1400" />
