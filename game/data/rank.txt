@@ -1,7 +1,7 @@
 hello 597
-world 597
-rmaks 597
-sazangnim 597
+None 0
+None 0
+None 0
 None 0
 None 0
 None 0

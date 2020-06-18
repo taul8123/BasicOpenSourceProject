@@ -100,7 +100,8 @@ def Game_Menu():
     running = 0
     Life = 4
     while Life != 0:
-        running = testmap.Map(screen, Life)
+        map_txt = 'testmap.txt'
+        running = testmap.Map(screen, Life, map_txt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()

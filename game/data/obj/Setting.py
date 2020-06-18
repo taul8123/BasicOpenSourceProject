@@ -3,7 +3,7 @@ class set():
         self.width=1920
         self.height=1080
         self.size=40
-        self.FPS = 30
+        self.FPS = 60
         self.Fall_speed=4
         self.wall=None
         #self.time_adjustment=60/self.FPS
