@@ -2,6 +2,7 @@
 import pygame
 import LoadMap
 from game.data.obj import Magnetic, Backblock, Star, Movewall, Blckhole, Spring, Fakewall, Thorn, Ball, Wall, iccle,Laser,lever,potal,Cannon
+from game.data.obj.Setting import setting
 
 img=['wall','star','setting','Exit',"thorn","Help"]#이미지 이름
 exit = -2
@@ -21,7 +22,7 @@ def menu():
 
 def Map(screen, Life):#스크린을 전달받음
     done = 1
-    FPS = 60        #프레임
+    FPS=setting.FPS
     key = 0         #공의 이동 방향 0이 바뀌지 않음 1이 오른쪽, -1이 왼쪽
 
     '''wall_list=pygame.sprite.Group()              #벽들을 모아둘 그룹
@@ -56,6 +57,7 @@ def Map(screen, Life):#스크린을 전달받음
     star = list_collection[6]
     thorn_list = list_collection[7]
     wall_list = list_collection[8]
+    setting.wall=wall_list
     spring_list = list_collection[9]
     iccle_list = list_collection[10]
     iccle_disappear_list = pygame.sprite.Group()  # 사라진 iccle들을 모아둘 그룹
@@ -244,7 +246,6 @@ def Map(screen, Life):#스크린을 전달받음
         background.fill((255,255,255))                #그려진거 비우기
         background.blit(star.image, star.rect)
         background.blit(ball.image, ball.rect)
-        wall_list.draw(background)
         fakewall_list.draw(background)
         spring_list.draw(background)
         movewall_list.draw(background)
@@ -277,6 +278,7 @@ def Map(screen, Life):#스크린을 전달받음
             background.blit(battery_3, (20, 10))
         elif Life == 4:
             background.blit(battery_4, (20, 10))
+        wall_list.draw(background)
 
         #스크린에 그리고 새로고침
         screen.blit(background,(0,0))

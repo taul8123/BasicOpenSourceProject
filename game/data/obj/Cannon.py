@@ -1,8 +1,6 @@
 import pygame
 from game.data.obj import Wall
-width=1920
-height=1080
-size=40
+from game.data.obj.Setting import setting as s
 
 class Shell(pygame.sprite.Sprite):
     def __init__(self, img, location, direction,speed):
@@ -18,7 +16,7 @@ class Shell(pygame.sprite.Sprite):
     def Move(self):
         '''방향에 따라 이동'''
         if self.direction==0:
-            self.rect.centery=self.rect.centery-self.speed
+            self.rect.centery=self.rect.centery-self.speed#*s.time_adjustment
         elif self.direction==1:
             self.rect.centerx=self.rect.centerx+self.speed
         elif self.direction==2:
@@ -26,7 +24,7 @@ class Shell(pygame.sprite.Sprite):
         elif self.direction==3:
             self.rect.centerx=self.rect.centerx-self.speed
 
-        if self.rect.right < 0 or self.rect.left>width or self.rect.top>height or self.rect.bottom<0:
+        if self.rect.right < 0 or self.rect.left>s.width or self.rect.top>s.height or self.rect.bottom<0:
             return 1
         return 0
 
@@ -41,15 +39,14 @@ class Shell(pygame.sprite.Sprite):
             return self.rect.center
 
 class Cannon(Wall.Wall):
-    def __init__(self,cannon_img,shell_img,location,area,direction=1,FPS=60,time=5,speed=3,obj=[]):
+    def __init__(self,cannon_img,shell_img,location,area,direction=1,time=4,speed=3):
         '''블럭 이미지, 대포알 이미지, 위치(튜플),면적(튜플),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 포탄발사 시간,스피드,충돌 가능성이 있는 객체들 공제외 (리스트)'''
         Wall.Wall.__init__(self,cannon_img,location,area)
         self.shell_list=pygame.sprite.Group()
         self.shell_img=shell_img
-        self.col_obj = obj
 
-        self.term=FPS*time              # 상태가 위지되어 있을 프레임 수
-        self.frame_counter = self.term  # 0보다 클 경우 상태유지
+        self.time=time              # 상태가 위지되어 있을 프레임 수
+        self.frame_counter = self.time*s.FPS  # 0보다 클 경우 상태유지
         self.direction=direction
         self.speed=speed
 
@@ -66,17 +63,14 @@ class Cannon(Wall.Wall):
     def shoot(self):
         self.frame_counter -= 1
         if self.frame_counter <= 0:
-            self.frame_counter=self.term
+            self.frame_counter=s.FPS*self.time
             self.shell_list.add(Shell(self.shell_img, self.d, self.direction,self.speed))  # 대포 발사
 
-        for s in self.shell_list:
-            if s.Move():
-                self.shell_list.remove(s)
+        for sh in self.shell_list:
+            if sh.Move():
+                self.shell_list.remove(sh)
 
-        for obj in self.col_obj:
-            collision_list = pygame.sprite.spritecollide(obj, self.shell_list, False, pygame.sprite.collide_mask)
-            for s in collision_list:
-                self.shell_list.remove(s)
+        pygame.sprite.groupcollide(s.wall, self.shell_list, False,True, pygame.sprite.collide_mask)
 
     def draw_shell(self,background):
         self.shell_list.draw(background)
