@@ -1,9 +1,8 @@
 #2019038026_이혁수
 import pygame
-
+from game.data.obj.Setting import setting as s
 MAX_SPEED=3     #최대 속도
-width=1920
-height=1080
+
 
 pygame.mixer.init()
 ballsound=pygame.mixer.Sound('game/audio/tick.wav')
@@ -20,7 +19,7 @@ def to_Zero(num):
 
 
 class Ball(pygame.sprite.Sprite):
-    def __init__(self, img, location, area,FPS=60):     # 이미지,시작죄표, 반환점 좌표,넓이와 높이를 튜플로 전달  ex: (가로,세로),FPS
+    def __init__(self, img, location, area):     # 이미지,시작죄표, 반환점 좌표,넓이와 높이를 튜플로 전달  ex: (가로,세로),FPS
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image = pygame.transform.scale(img, area)  # 이미지의 크기를 내가 원하는 크기로 조정
         self.rect = self.image.get_rect()               # 이미지의 사각형에 해당하는 범위를 가져옴
@@ -28,9 +27,9 @@ class Ball(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)#충돌감지를 위한 마스크 생성
 
         #함수내용 구현시 필요 한것
-        self.gravity=MAX_SPEED/FPS*2                        #왕복하는데 걸리는 프레임
+        self.gravity=MAX_SPEED/s.FPS*2    #왕복하는데 걸리는 프레임
         self.speed=[0,0]                                    #공의 속도를 조정 [x,y]
-        self.dontchangespeed=0                            # 좌우스피드 변경 불가능하게 하는 프레임수
+        self.dontchangespeed=0                              # 좌우스피드 변경 불가능하게 하는 프레임수
 
 
     def move_y(self):
@@ -89,11 +88,11 @@ class Ball(pygame.sprite.Sprite):
 
         self.move_y()
 
-        if self.rect.top>height or self.rect.bottom<0:
+        if self.rect.top>s.height or self.rect.bottom<0:
             return 1
         elif self.rect.left<0:
             self.rect.left=0
-        elif self.rect.right>width:
+        elif self.rect.right>s.width:
             self.rect.right=0
 
         return 0

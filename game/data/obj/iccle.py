@@ -1,29 +1,24 @@
 import pygame
-
-Fall_speed=4
-width=1920
-height=1080
+from game.data.obj.Setting import setting as s
 
 class Iccle(pygame.sprite.Sprite):
-    def __init__(self,img,location,area,FPS=60,time=5,speed=1,obj=[]):
-        '''블럭 이미지, 위치(튜플),면적(튜플), FPS, 고드름이 사라져있는 시간,충돌 가능성이 있는 객체들 공제외 (리스트)'''
+    def __init__(self,img,location,area,time=2,speed=1):
+        '''블럭 이미지, 위치(튜플),면적(튜플), 고드름이 사라져있는 시간,충돌 가능성이 있는 객체들 공제외 (리스트)'''
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image= pygame.transform.scale(img,area)    #이미지의 크기를 내가 원하는 크기로 조정
         self.rect= self.image.get_rect()                #이미지의 사각형에 해당하는 범위를 가져옴
         self.rect.topleft= location                     #위치설정
         self.mask=pygame.mask.from_surface(self.image)  #충돌감지를 위한 마스크생성
 
-        self.gravity=speed*Fall_speed/FPS
+        self.gravity=speed*s.Fall_speed/s.FPS#*s.time_adjustment
 
-        self.FPS = FPS  # 사라지는 시간 설정을 위해 FPS를 저장해둠
         self.speed=1
         self.frame_counter = 0  # 1이상일 경우 사라져 있음
         self.disappear_time = time  # 사라져있을시간
-        self.col_obj=obj
         self.star_loc=location      #시작위치
 
     def disappear(self):
-        self.frame_counter=self.FPS*self.disappear_time
+        self.frame_counter=s.FPS*self.disappear_time
 
 
     def isnotdisappear(self):
@@ -37,12 +32,12 @@ class Iccle(pygame.sprite.Sprite):
 
     def move(self):
         '''아래로 떨어짐 만약 다른 블럭들과 부딪칠 경우 1 아닐경우 0반환'''
-        if self.rect.right < 0 or self.rect.left>width or self.rect.top>height or self.rect.bottom<0:
+        if self.rect.right < 0 or self.rect.left>s.width or self.rect.top>s.height or self.rect.bottom<0:
             return 1
 
-        for obj in self.col_obj:
-            if (pygame.sprite.collide_mask(self, obj)):
-                return 1
+        collision_list = pygame.sprite.spritecollide(self, s.wall, False, pygame.sprite.collide_mask)
+        if collision_list:
+           return 1
 
         x,y=self.rect.center
 
@@ -72,6 +67,3 @@ class Iccle(pygame.sprite.Sprite):
         if not self.col_obj:
             return -1
         return 0
-
-    def setFPS(self,FPS):
-        self.FPS=FPS
