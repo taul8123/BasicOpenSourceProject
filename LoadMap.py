@@ -87,8 +87,8 @@ def loadmap(screen, Map_name = "map.txt"):
         if temp[0].find('backblock') != -1:
             backblock_list.add(Backblock.Backblock(backblock_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('ball') != -1:
-            ball = Ball.Ball(ball_image, (int((int(temp[1])+(1/4)*int(temp[3]))), int(int(temp[2])+(1/4)*int(temp[3]))),\
-                             (int(temp[3])//2, int(temp[3])//2))
+            ball = Ball.Ball(ball_image, (int((int(temp[1])+(0.1)*int(temp[3]))), int(int(temp[2])+(0.1)*int(temp[3]))),\
+                             (4*(int(temp[3])//5), 4*(int(temp[3])//5)))
         elif temp[0].find('blckhole') != -1:
             blckhole_list.add(Blckhole.Blackhole(blckhole_image, (int(temp[1]), int(temp[2])), (int(temp[3]), int(temp[3]))))
         elif temp[0].find('fakewal') != -1:
