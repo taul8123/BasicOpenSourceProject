@@ -168,7 +168,7 @@ default_blackdot = pygame.transform.scale(default_blackdot, (pixel_size, pixel_s
 default_subportal = pygame.transform.scale(default_subportal, (pixel_size, pixel_size))
 
 default_backblock = pygame.transform.scale(default_backblock, (pixel_size, pixel_size))
-default_ball = pygame.transform.scale(default_ball, (pixel_size, pixel_size))
+default_ball = pygame.transform.scale(default_ball, (pixel_size//2, pixel_size//2))
 default_blckhole = pygame.transform.scale(default_blckhole, (pixel_size, pixel_size))
 default_fakewal = pygame.transform.scale(default_fakewal, (pixel_size, pixel_size))
 default_magnetic = pygame.transform.scale(default_magnetic, (pixel_size, pixel_size))
@@ -234,7 +234,7 @@ while True:
                 if display[i][j].find('backblock') != -1:
                     screen.blit(default_backblock, (i*pixel_size, j*pixel_size))
                 elif display[i][j].find('ball') != -1:
-                    screen.blit(default_ball, (i*pixel_size, j*pixel_size))
+                    screen.blit(default_ball, (i*pixel_size+int((1/4)*pixel_size), j*pixel_size+int((1/4)*pixel_size)))
                 elif display[i][j].find('blckhole') != -1:
                     screen.blit(default_blckhole, (i*pixel_size, j*pixel_size))
                 elif display[i][j].find('fakewal') != -1:
