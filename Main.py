@@ -13,6 +13,7 @@ FullToggle = config.get("Setting", "Fullscreen_Toggle")
 SoundToggle = config.get("Setting", "Sound")
 ScoreToggle = config.get("Setting", "Display_Score")
 Frame = config.get("Setting", "Frame")
+StoryToggle = config.get("Game", "Story_Toggle")
 
 # Pygame Initialize
 pygame.init()
@@ -255,4 +256,45 @@ def show_screen():
     screen.blit(Score_Button, (1240, 715))
     screen.blit(Exit_Button, (1300, 880))
 
+
+def Show_Story():
+    running = 6
+    Story_1 = pygame.image.load("game/image/Story_1.png")
+    Story_2 = pygame.image.load("game/image/Story_2.png")
+    Story_3 = pygame.image.load("game/image/Story_3.png")
+    Story_4 = pygame.image.load("game/image/Story_4.png")
+    Story_5 = pygame.image.load("game/image/Story_5.png")
+    Story_6 = pygame.image.load("game/image/Story_6.png")
+    while running:
+        if running == 6:
+            screen.blit(Story_1, (0, 0))
+        if running == 5:
+            screen.blit(Story_2, (0, 0))
+        if running == 4:
+            screen.blit(Story_3, (0, 0))
+        if running == 3:
+            screen.blit(Story_4, (0, 0))
+        if running == 2:
+            screen.blit(Story_5, (0, 0))
+        if running == 1:
+            screen.blit(Story_6, (0, 0))
+        pygame.display.flip()
+        for event in pygame.event.get():
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    running -= 1
+                if event.key == pygame.K_ESCAPE:
+                    running = 0
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+
+
+if StoryToggle == "False":
+    Show_Story()
+    #StoryToggle = "True"
+    #config.set("Game", "Story_Toggle", "True")
+    #ConfigFile = open('game/data/Setting.cfg', 'w')
+    #config.write(ConfigFile)
+    #ConfigFile.close()
 Start_Menu()
