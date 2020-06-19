@@ -1,7 +1,6 @@
 # Bouncy Dungeon Tech-alpha 0.1
-import pygame, sys, os, configparser, testmap
-from game.data import SaveScore
-
+import pygame, sys, os, configparser, testmap, random
+from game.data import SaveScore, Rankinit
 # Setting before Main
 mainClock = pygame.time.Clock()
 
@@ -62,10 +61,20 @@ help_button = button(1680, 20, 66, 105)
 exit_button = button(1300, 880, 481, 110)
 
 
+map_List = []
+
+
+def initialze_map():
+    map_L = ["easy_map1.txt", "easy_map2.txt", "easy_map3.txt", "easy_map4.txt", "hard_map1.txt", "hell_map1.txt", "normal_map1.txt", "normal_map2.txt","normal_map3.txt","normal_map4.txt"]
+    return map_L
+
+def suffle_map(map_t, map_L):
+    map_t = map_L.pop(random.randrange(0, len(map_L)))
+    return map_t
+
+
 # Here is Main
 def Start_Menu():
-    #pygame.mixer.music.load('game/audio/Main_bgm.mp3')
-    #pygame.mixer.music.play(-1)
     while True:
         show_screen()
         for event in pygame.event.get():
@@ -99,8 +108,11 @@ def Start_Menu():
 def Game_Menu():
     running = 0
     Life = 4
+    map_txt = ''
+    map_List = initialze_map()
+    map_txt = suffle_map(map_txt, map_List)
+    newscore = 0
     while Life != 0:
-        map_txt = 'testmap.txt'
         running = testmap.Map(screen, Life, map_txt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -110,19 +122,22 @@ def Game_Menu():
             die_sound.play()
             pygame.time.delay(250)
             Life -= 1
+        elif running == 1:
+            if (len(map_List) == 0):
+                break
+            map_txt = suffle_map(map_txt, map_List)
+            newscore += 1
         elif running == -2 or running == 1:
             break
 
     if Life == 0:
         print("gameover")
-        newscore = 597
         newname = SaveScore.get_name(screen)
         SaveScore.save_new_score(newscore, newname)
         Score_Menu()
 
     elif running ==1:
         print("클리어")
-        newscore = 597
         newname = SaveScore.get_name(screen)
         SaveScore.save_new_score(newscore, newname)
         Score_Menu()
@@ -203,24 +218,25 @@ def Setting_Menu():
 def Score_Menu():
     running = True
     screen.blit(Score_Board, (0, 0))
-    textheight = height // 2 - 160
-    textwidth = width // 2 - 250
     while running:
         f = open('game/data/rank.txt', 'r')
         textheight = height // 2 - 160
-        textwidth = width // 2 - 250
+        textwidth = width // 2 - 450
         while True:
             line = f.readline()
             if not line:
                 break
             name, score = line.split(' ')
-            text = name + "                                       " + score
             textfont = pygame.font.Font('game/data/NanumGothic.ttf', 40)
-            text = textfont.render(text, True, (0, 0, 0))
-            textpos = text.get_rect()
+            name = textfont.render(name, True, (0, 0, 0))
+            score = textfont.render(score, True, (0, 0, 0))
+            namepos = name.get_rect()
+            scorepos = score.get_rect()
             textheight += 45
-            textpos.center = (textwidth, textheight)
-            screen.blit(text, textpos)
+            namepos.center = (textwidth, textheight)
+            scorepos.center = (textwidth + 450, textheight)
+            screen.blit(name, namepos)
+            screen.blit(score, scorepos)
         f.close()
         pygame.display.flip()
 
@@ -228,6 +244,10 @@ def Score_Menu():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = 0
+                if event.key == pygame.K_F5:
+                    Rankinit.rank_init()
+                    show_screen()
+                    screen.blit(Score_Board, (0, 0))
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -291,6 +311,9 @@ def Show_Story():
                 sys.exit()
 
 
+
+#pygame.mixer.music.load('game/audio/Main_bgm.mp3')
+#pygame.mixer.music.play(-1)
 if StoryToggle == "False":
     Show_Story()
     #StoryToggle = "True"
