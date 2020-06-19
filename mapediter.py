@@ -118,7 +118,7 @@ default_xmark = pygame.image.load('game/image/mapeditimage/xmark.png')
 default_blackdot = pygame.image.load('game/image/mapeditimage/blackdot.png')
 
 default_subportal = pygame.image.load('game/image/mapeditimage/subportal.png')
-default_leverOnOff = pygame.image.load('game/image/mapeditimage/leverOn.png')
+default_leverOnOff = pygame.image.load('game/image/mapeditimage/leverOFF.png')
 
 default_backblock = pygame.image.load('game/image/mapeditimage/backblock.png')
 default_ball = pygame.image.load('game/image/mapeditimage/ball.png')
