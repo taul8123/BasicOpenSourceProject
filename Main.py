@@ -1,5 +1,5 @@
 # Bouncy Dungeon Tech-alpha 0.1
-import pygame, sys, os, configparser, testmap
+import pygame, sys, os, configparser, testmap, random
 from game.data import SaveScore
 
 # Setting before Main
@@ -62,10 +62,20 @@ help_button = button(1680, 20, 66, 105)
 exit_button = button(1300, 880, 481, 110)
 
 
+map_List = []
+
+
+def initialze_map():
+    map_L = ["easy_map1.txt", "easy_map2.txt", "easy_map3.txt", "easy_map4.txt", "hard_map1.txt", "hell_map1.txt", "normal_map1.txt", "normal_map2.txt","normal_map3.txt","normal_map4.txt"]
+    return map_L
+
+def suffle_map(map_t, map_L):
+    map_t = map_L.pop(random.randrange(0, len(map_L)))
+    return map_t
+
+
 # Here is Main
 def Start_Menu():
-    #pygame.mixer.music.load('game/audio/Main_bgm.mp3')
-    #pygame.mixer.music.play(-1)
     while True:
         show_screen()
         for event in pygame.event.get():
@@ -99,8 +109,11 @@ def Start_Menu():
 def Game_Menu():
     running = 0
     Life = 4
+    map_txt = ''
+    map_List = initialze_map()
+    map_txt = suffle_map(map_txt, map_List)
+    newscore = 0
     while Life != 0:
-        map_txt = 'testmap.txt'
         running = testmap.Map(screen, Life, map_txt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -110,19 +123,22 @@ def Game_Menu():
             die_sound.play()
             pygame.time.delay(250)
             Life -= 1
+        elif running == 1:
+            if (len(map_List) == 0):
+                break
+            map_txt = suffle_map(map_txt, map_List)
+            newscore += 1
         elif running == -2 or running == 1:
             break
 
     if Life == 0:
         print("gameover")
-        newscore = 597
         newname = SaveScore.get_name(screen)
         SaveScore.save_new_score(newscore, newname)
         Score_Menu()
 
     elif running ==1:
         print("클리어")
-        newscore = 597
         newname = SaveScore.get_name(screen)
         SaveScore.save_new_score(newscore, newname)
         Score_Menu()
@@ -291,6 +307,9 @@ def Show_Story():
                 sys.exit()
 
 
+
+#pygame.mixer.music.load('game/audio/Main_bgm.mp3')
+#pygame.mixer.music.play(-1)
 if StoryToggle == "False":
     Show_Story()
     #StoryToggle = "True"
