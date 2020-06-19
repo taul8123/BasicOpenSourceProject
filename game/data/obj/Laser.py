@@ -16,6 +16,7 @@ class Layser(pygame.sprite.Sprite):
 
         self.direction=direction
 
+
     def Move(self):
         '''방향에 따라 이동'''
         if self.direction==0:
@@ -53,6 +54,7 @@ class Layserblock(Wall.Wall):
         self.frame_counter = s.FPS*self.time  # 1이상일 경우 상태유지
         self.state = False              # True 일때 레이저 발사x False일때 발사
         self.direction=direction
+        self.shoot = self.state
 
         #레이저 생성 위치설정
         if self.direction==0:
@@ -79,22 +81,22 @@ class Layserblock(Wall.Wall):
         self.frame_counter -= 1
         if self.frame_counter <=0:
             self.state= not self.state
+            self.shoot=self.state
             self.frame_counter=s.FPS*self.time
             self.layser_list.empty()
 
         if self.state:
             return 0
 
-        for layser in self.layser_list:
-            if layser.Move():
-                self.layser_list.remove(layser)
+        if not self.shoot :
+            for layser in self.layser_list:
+                if layser.Move():
+                    self.layser_list.remove(layser)
+                    self.shoot=True
 
-
-
-        pygame.sprite.groupcollide(s.wall, self.layser_list, False,True, pygame.sprite.collide_mask)
-
-
-        self.layser_list.add(Layser(self.layser_img,self.d,self.direction))     #레이저의 생성
+            if pygame.sprite.groupcollide(s.wall, self.layser_list, False,True, pygame.sprite.collide_mask):
+                self.shoot=True
+            self.layser_list.add(Layser(self.layser_img,self.d,self.direction))     #레이저의 생성
 
     def draw_layser(self,background):
         self.layser_list.draw(background)

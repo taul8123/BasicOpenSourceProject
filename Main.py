@@ -153,7 +153,7 @@ def Setting_Menu():
     Score_Button = button(970, 475, 75, 75)
     Frame_LOW_Button = button(780, 600, 160, 80)
     Frame_MID_Button = button(1065, 600, 160, 80)
-    #Frame_HIGH_Button = button(1380, 600, 160, 80)
+    Frame_HIGH_Button = button(1380, 600, 160, 80)
 
     while running:
         global SoundToggle
@@ -205,10 +205,10 @@ def Setting_Menu():
                     Frame = "Mid"
                     config.set("Setting", "Frame", "Mid")
                     s.set_FPS(60)
-                '''if Frame_HIGH_Button.isOver(pos):
+                if Frame_HIGH_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "High"
-                    config.set("Setting", "Frame", "High")'''
+                    config.set("Setting", "Frame", "High")
                 ConfigFile = open('game/data/Setting.cfg', 'w')
                 config.write(ConfigFile)
                 ConfigFile.close()
