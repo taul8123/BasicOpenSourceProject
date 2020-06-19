@@ -56,8 +56,8 @@ CreateCannon = 16
 # 아래는 수정할 수 있는 변수들 입니다.
 # !!!!!!!!!!!!!맵의 경우 "확장자"를 꼭 포함하여 적어주세요!!!!!!!!!!!!!!!!!!!
 pixel_size = 40
-OpenFile = "test_map.txt"
-SaveFile = "test_map.txt"
+OpenFile = "testmap.txt"
+SaveFile = "testmap.txt"
 ################################################################
 
 display = []

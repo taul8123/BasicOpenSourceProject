@@ -1,8 +1,11 @@
 # Bouncy Dungeon Tech-alpha 0.1
-import pygame, sys, os, configparser, testmap, random
+import pygame, sys, os, configparser, map, random
 from game.data import SaveScore, Rankinit
+from game.data.obj.Setting import setting as s
 # Setting before Main
 mainClock = pygame.time.Clock()
+
+FPS_dic={"Low":30,"Mid":60,"High":60}
 
 # Load Config.cfg
 config = configparser.RawConfigParser()
@@ -13,6 +16,7 @@ SoundToggle = config.get("Setting", "Sound")
 ScoreToggle = config.get("Setting", "Display_Score")
 Frame = config.get("Setting", "Frame")
 StoryToggle = config.get("Game", "Story_Toggle")
+s.set_FPS(FPS_dic[config.get("Setting", "Frame")])
 
 # Pygame Initialize
 pygame.init()
@@ -82,9 +86,9 @@ def Start_Menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if s_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    #pygame.mixer.music.pause()
+                    pygame.mixer.music.pause()
                     Game_Menu()
-                    #pygame.mixer.music.unpause()
+                    pygame.mixer.music.unpause()
                 if setting_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Setting_Menu()
@@ -113,7 +117,7 @@ def Game_Menu():
     map_txt = suffle_map(map_txt, map_List)
     newscore = 0
     while Life != 0:
-        running = testmap.Map(screen, Life, map_txt)
+        running = map.Map(screen, Life, map_txt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -149,7 +153,7 @@ def Setting_Menu():
     Score_Button = button(970, 475, 75, 75)
     Frame_LOW_Button = button(780, 600, 160, 80)
     Frame_MID_Button = button(1065, 600, 160, 80)
-    Frame_HIGH_Button = button(1380, 600, 160, 80)
+    #Frame_HIGH_Button = button(1380, 600, 160, 80)
 
     while running:
         global SoundToggle
@@ -195,14 +199,16 @@ def Setting_Menu():
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "Low"
                     config.set("Setting", "Frame", "Low")
+                    s.set_FPS(30)
                 if Frame_MID_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "Mid"
                     config.set("Setting", "Frame", "Mid")
-                if Frame_HIGH_Button.isOver(pos):
+                    s.set_FPS(60)
+                '''if Frame_HIGH_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "High"
-                    config.set("Setting", "Frame", "High")
+                    config.set("Setting", "Frame", "High")'''
                 ConfigFile = open('game/data/Setting.cfg', 'w')
                 config.write(ConfigFile)
                 ConfigFile.close()
@@ -312,13 +318,13 @@ def Show_Story():
 
 
 
-#pygame.mixer.music.load('game/audio/Main_bgm.mp3')
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.load('game/audio/Main_bgm.mp3')
+pygame.mixer.music.play(-1)
 if StoryToggle == "False":
     Show_Story()
-    #StoryToggle = "True"
-    #config.set("Game", "Story_Toggle", "True")
-    #ConfigFile = open('game/data/Setting.cfg', 'w')
-    #config.write(ConfigFile)
-    #ConfigFile.close()
+    StoryToggle = "True"
+    config.set("Game", "Story_Toggle", "True")
+    ConfigFile = open('game/data/Setting.cfg', 'w')
+    config.write(ConfigFile)
+    ConfigFile.close()
 Start_Menu()

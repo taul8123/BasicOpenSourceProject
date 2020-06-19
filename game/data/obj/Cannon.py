@@ -16,13 +16,13 @@ class Shell(pygame.sprite.Sprite):
     def Move(self):
         '''방향에 따라 이동'''
         if self.direction==0:
-            self.rect.centery=self.rect.centery-self.speed#*s.time_adjustment
+            self.rect.centery=self.rect.centery-self.speed*s.time_adjustment
         elif self.direction==1:
-            self.rect.centerx=self.rect.centerx+self.speed
+            self.rect.centerx=self.rect.centerx+self.speed*s.time_adjustment
         elif self.direction==2:
-            self.rect.centerx=self.rect.centery+self.speed
+            self.rect.centerx=self.rect.centery+self.speed*s.time_adjustment
         elif self.direction==3:
-            self.rect.centerx=self.rect.centerx-self.speed
+            self.rect.centerx=self.rect.centerx-self.speed*s.time_adjustment
 
         if self.rect.right < 0 or self.rect.left>s.width or self.rect.top>s.height or self.rect.bottom<0:
             return 1
@@ -39,7 +39,7 @@ class Shell(pygame.sprite.Sprite):
             return self.rect.center
 
 class Cannon(Wall.Wall):
-    def __init__(self,cannon_img,shell_img,location,area,direction=1,time=4,speed=3):
+    def __init__(self,cannon_img,shell_img,location,area,direction=1,time=2,speed=4):
         '''블럭 이미지, 대포알 이미지, 위치(튜플),면적(튜플),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 포탄발사 시간,스피드,충돌 가능성이 있는 객체들 공제외 (리스트)'''
         Wall.Wall.__init__(self,cannon_img,location,area)
         self.shell_list=pygame.sprite.Group()

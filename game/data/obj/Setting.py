@@ -6,10 +6,12 @@ class set():
         self.FPS = 60
         self.Fall_speed=4
         self.wall=None
-        #self.time_adjustment=60/self.FPS
+        self.time_adjustment=60/self.FPS
+        self.MAX_SPEED = 3*self.time_adjustment  # 최대 속도
 
     def set_FPS(self,FPS):
         self.FPS=FPS
-        #self.time_adjustment=60/self.FPS
+        self.time_adjustment=60/self.FPS
+        self.MAX_SPEED=3*self.time_adjustment
 
 setting=set()
