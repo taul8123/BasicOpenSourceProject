@@ -4,14 +4,14 @@ from game.data.obj.Setting import setting as s
 
 class block(pygame.sprite.Sprite):
     def __init__(self,img,location,area,time=5):
-        '''블럭 이미지, 위치(튜플),면적(튜플), FPS, 상태가 지속되는 시간'''
+        '''블럭 이미지, 위치(튜플),면적(튜플), 상태가 지속되는 시간'''
         pygame.sprite.Sprite.__init__(self)  # 스프라이트 초기화
         self.image = pygame.transform.scale(img, area)  # 이미지의 크기를 내가 원하는 크기로 조정
         self.rect = self.image.get_rect()  # 이미지의 사각형에 해당하는 범위를 가져옴
         self.rect.topleft = location  # 위치설정
         self.mask = pygame.mask.from_surface(self.image)  # 충돌감지를 위한 마스크생성
 
-        self.time=time  # 상태가 위지되어 있을 프레임 수
+        self.time=time  # 상태가 유지되어 있을 시간
         self.frame_counter = self.time*s.FPS  # 0이 될때 상태 반전 상태유지
         self.invisible=False                #안보이면 true 보이면 false
 

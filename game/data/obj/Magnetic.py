@@ -1,5 +1,4 @@
 import pygame
-from game.data.obj import Ball
 from game.data.obj.Setting import setting as s
 
 class Magnetic(pygame.sprite.Sprite):

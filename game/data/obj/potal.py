@@ -14,7 +14,6 @@ class subpotal(pygame.sprite.Sprite):
         self.col_obj=obj
         self.stopframe=stopframe
         self.term=term
-        self.a=0
 
     def teleport(self,ball,s):
 

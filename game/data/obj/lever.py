@@ -24,7 +24,7 @@ class block(Wall.Wall):
 
 class Lever(pygame.sprite.Sprite):
     def __init__(self,lever_img,block_img,lever_location,block_location,area):
-        '''레버 이미지, 블록 켜짐 꺼짐 이미지(튜플), 레버위치(튜플로 이루어진 튜플),블록위치(튜플),면적(튜플)'''
+        '''레버 이미지, 블록 켜짐 꺼짐 이미지(튜플), 레버위치(튜플로 이루어진 리스트),블록위치(튜플),면적(튜플)'''
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image= pygame.transform.scale(lever_img,area)    #이미지의 크기를 내가 원하는 크기로 조정
         self.rect= self.image.get_rect()                #이미지의 사각형에 해당하는 범위를 가져옴

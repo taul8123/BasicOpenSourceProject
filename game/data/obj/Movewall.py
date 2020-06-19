@@ -1,7 +1,6 @@
 import pygame
 from game.data.obj import Wall
 from game.data.obj.Setting import setting as s
-'''속도 수정필요, 이보다 더 느리게 해야 될시 추가적인 변수로 좌포값을 따로 계산 및 저장하고 그값을 매번 집어 넣는 것이 필요'''
 
 class Movewall(Wall.Wall):
     def __init__(self, img, start,end, area,speed=1):  # 이미지,설치좌표(튜플로 전달),폭과 높이를 튜플로 전달,이동 거리

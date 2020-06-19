@@ -45,7 +45,7 @@ class Layser(pygame.sprite.Sprite):
 
 class Layserblock(Wall.Wall):
     def __init__(self,block_img,layser_img,location,area,direction=1,time=5):
-        '''블럭 이미지, 레이저 이미지, 위치(튜플),면적(튜플),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 레이저가  나오고 안나오는 상태가 지속되는 시간,충돌 가능성이 있는 객체들 공제외 (리스트)'''
+        '''블럭 이미지, 레이저 이미지, 위치(튜플),면적(튜플),방향:위(0),오른쪽(1),아래(2),왼쪽(3), FPS, 레이저가  나오고 안나오는 상태가 지속되는 시간'''
         Wall.Wall.__init__(self,block_img,location,area)
         self.layser_list=pygame.sprite.Group()
         self.layser_img=layser_img
