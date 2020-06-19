@@ -50,7 +50,7 @@ def loadmap(screen, Map_name = "map.txt"):
 
     cannonball_image = pygame.image.load('game/image/mapeditimage/cannonball.png').convert_alpha()
 
-    backblock_image = pygame.image.load('game/image/mapeditimage/move.png').convert_alpha()
+    backblock_image = pygame.image.load('game/image/mapeditimage/backblock.png').convert_alpha()
     ball_image = pygame.image.load('game/image/mapeditimage/ball.png').convert_alpha()
     blckhole_image = pygame.image.load('game/image/mapeditimage/blckhole.png').convert_alpha()
     fakewal_image = pygame.image.load('game/image/mapeditimage/fakewal.png').convert_alpha()
