@@ -1,7 +1,6 @@
 # Bouncy Dungeon Tech-alpha 0.1
 import pygame, sys, os, configparser, testmap, random
-from game.data import SaveScore
-
+from game.data import SaveScore, Rankinit
 # Setting before Main
 mainClock = pygame.time.Clock()
 
@@ -219,24 +218,25 @@ def Setting_Menu():
 def Score_Menu():
     running = True
     screen.blit(Score_Board, (0, 0))
-    textheight = height // 2 - 160
-    textwidth = width // 2 - 250
     while running:
         f = open('game/data/rank.txt', 'r')
         textheight = height // 2 - 160
-        textwidth = width // 2 - 250
+        textwidth = width // 2 - 450
         while True:
             line = f.readline()
             if not line:
                 break
             name, score = line.split(' ')
-            text = name + "                                       " + score
             textfont = pygame.font.Font('game/data/NanumGothic.ttf', 40)
-            text = textfont.render(text, True, (0, 0, 0))
-            textpos = text.get_rect()
+            name = textfont.render(name, True, (0, 0, 0))
+            score = textfont.render(score, True, (0, 0, 0))
+            namepos = name.get_rect()
+            scorepos = score.get_rect()
             textheight += 45
-            textpos.center = (textwidth, textheight)
-            screen.blit(text, textpos)
+            namepos.center = (textwidth, textheight)
+            scorepos.center = (textwidth + 450, textheight)
+            screen.blit(name, namepos)
+            screen.blit(score, scorepos)
         f.close()
         pygame.display.flip()
 
@@ -244,6 +244,10 @@ def Score_Menu():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = 0
+                if event.key == pygame.K_F5:
+                    Rankinit.rank_init()
+                    show_screen()
+                    screen.blit(Score_Board, (0, 0))
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
