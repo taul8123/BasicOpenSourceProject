@@ -1,12 +1,13 @@
 import pygame
-from game.data.obj import Wall,Ball
+from game.data.obj import Wall
+from game.data.obj.Setting import setting as s
 
 class block(Wall.Wall):
     def __init__(self, img, location, area):
         self.image_list=(pygame.transform.scale(img[0],area),pygame.transform.scale(img[1],area)) #(활설화이미지, 비활성화이미지)
         Wall.Wall.__init__(self,self.image_list[1],location,area)# 충돌감지를 위한 마스크생성시에 이미지가 바뀌어도 상관없는지 확인필요)
 
-        self.state=True             #True시 활성 False시 비활성
+        self.state=False             #True시 활성 False시 비활성
 
     def change_state(self):
         '''상태 변경(ex:활성->비활성) 후 그에 맞는 이미지 입력'''
@@ -23,7 +24,7 @@ class block(Wall.Wall):
 
 class Lever(pygame.sprite.Sprite):
     def __init__(self,lever_img,block_img,lever_location,block_location,area):
-        '''레버 이미지, 블록 켜짐 꺼짐 이미지(튜플), 레버위치(튜플로 이루어진 튜플),블록위치(튜플),면적(튜플)'''
+        '''레버 이미지, 블록 켜짐 꺼짐 이미지(튜플), 레버위치(튜플로 이루어진 리스트),블록위치(튜플),면적(튜플)'''
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image= pygame.transform.scale(lever_img,area)    #이미지의 크기를 내가 원하는 크기로 조정
         self.rect= self.image.get_rect()                #이미지의 사각형에 해당하는 범위를 가져옴
@@ -43,9 +44,9 @@ class Lever(pygame.sprite.Sprite):
         #y좌표는 낮을수록 위이기에 ball이 더 작을 경우가 wall이 아래 있음
         if self.rect.top >= ball.get_center(1) - ball.get_speed(1):
             #속도가 10이 넘을시 사망
-            if ball.get_speed(1)>10:
+            if ball.get_speed(1)>s.MAX_SPEED*3.3:
                 return 1
-            ball.speed_set_y(-Ball.MAX_SPEED)
+            ball.speed_set_y(-s.MAX_SPEED)
             #블럭 상태 반전
             for b in self.block_list:
                 b.change_state()
@@ -61,5 +62,5 @@ class Lever(pygame.sprite.Sprite):
             ball.reverse_speed_x()
             # 떨어질때 닿은 것이 아니라 올라갈때 닿으면 더 올라갈 수 있도록 y축 설정 (벽타기)
             if ball.get_speed_y() <= 0:
-                ball.speed_set_y(-Ball.MAX_SPEED // 2)
+                ball.speed_set_y(-s.MAX_SPEED // 2)
         return 0

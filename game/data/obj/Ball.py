@@ -1,7 +1,7 @@
 #2019038026_이혁수
 import pygame
 from game.data.obj.Setting import setting as s
-MAX_SPEED=3     #최대 속도
+
 
 
 pygame.mixer.init()
@@ -11,9 +11,9 @@ ballsound.set_volume(0.5)
 def to_Zero(num):
     '''관성구현을 휘한 함수'''
     if num < 0:
-        return 1
+        return 1*s.time_adjustment
     elif num > 0:
-        return -1
+        return -1*s.time_adjustment
     else:
         return 0
 
@@ -27,7 +27,11 @@ class Ball(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)#충돌감지를 위한 마스크 생성
 
         #함수내용 구현시 필요 한것
-        self.gravity=MAX_SPEED/s.FPS*2    #왕복하는데 걸리는 프레임
+        if s.FPS==60:
+            self.gravity=s.MAX_SPEED/s.FPS*1.75    #왕복하는데 걸리는 프레임
+        elif s.FPS==30:
+            self.gravity = s.MAX_SPEED / s.FPS * 1.25
+
         self.speed=[0,0]                                    #공의 속도를 조정 [x,y]
         self.dontchangespeed=0                              # 좌우스피드 변경 불가능하게 하는 프레임수
 
@@ -54,14 +58,14 @@ class Ball(pygame.sprite.Sprite):
         if a==0:
             self.speed[0]+=to_Zero(self.speed[0])
         else:
-            self.speed[0] += a
+            self.speed[0] += a*s.time_adjustment
 
             #최대 속도 제한
-        if self.speed[0]<-MAX_SPEED:
-            self.speed[0]=-MAX_SPEED
+        if self.speed[0]<-s.MAX_SPEED:
+            self.speed[0]=-s.MAX_SPEED
 
-        elif self.speed[0]>MAX_SPEED:
-            self.speed[0]=MAX_SPEED
+        elif self.speed[0]>s.MAX_SPEED:
+            self.speed[0]=s.MAX_SPEED
 
         #x이동
         x += self.speed[0]
@@ -97,9 +101,11 @@ class Ball(pygame.sprite.Sprite):
 
         return 0
 
-    def speed_set_y(self,s):
+    def speed_set_y(self,sp):
         '''y축 속도 변경'''
-        self.speed[1]=s
+        self.speed[1]=sp
+        '''if s.FPS==30:
+            self.speed[1]+=1'''
         ballsound.play()
 
     def speed_set_x(self,s):
@@ -123,7 +129,7 @@ class Ball(pygame.sprite.Sprite):
 
     def set_dontchangespeed(self,num):
         '''몇프레임 동안 못움직이게 하는지 체크하는 변수의 값변경'''
-        self.dontchangespeed=num
+        self.dontchangespeed=s.FPS/6
 
     def reverse_speed_x(self):
         '''x축의 속도를 뒤집음(즉, 방향을 바꿈)'''

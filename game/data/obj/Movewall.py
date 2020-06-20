@@ -1,19 +1,22 @@
 import pygame
 from game.data.obj import Wall
 from game.data.obj.Setting import setting as s
-'''속도 수정필요, 이보다 더 느리게 해야 될시 추가적인 변수로 좌포값을 따로 계산 및 저장하고 그값을 매번 집어 넣는 것이 필요'''
 
 class Movewall(Wall.Wall):
-    def __init__(self, img, start,end, area,FPS=60,speed=1):  # 이미지,설치좌표(튜플로 전달),폭과 높이를 튜플로 전달,이동 거리
+    def __init__(self, img, start,end, area,speed=1):  # 이미지,설치좌표(튜플로 전달),폭과 높이를 튜플로 전달,이동 거리
         pygame.sprite.Sprite.__init__(self)  # 스프라이트 초기화
         self.image = pygame.transform.scale(img, area)  # 이미지의 크기를 내가 원하는 크기로 조정
         self.rect = self.image.get_rect()  # 이미지의 사각형에 해당하는 범위를 가져옴
         self.rect.topleft = start  # 위치설정
         self.mask = pygame.mask.from_surface(self.image)  # 충돌감지를 위한 마스크생성
 
-        self.end=end
-        self.start=start
-        self.speed=[speed,speed]
+        self.end = end
+        self.start = start
+        self.speed = [0, 0]
+        if start[0] - end[0]:
+            self.speed[0] = speed*s.time_adjustment
+        elif start[1] - end[1]:
+            self.speed[1] = speed*s.time_adjustment
 
 
     def Move(self):

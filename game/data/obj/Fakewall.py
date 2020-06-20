@@ -4,7 +4,7 @@ from game.data.obj.Setting import setting as s
 
 
 class Fakewall(Wall.Wall):      #Wall상속
-    def __init__(self, img, location, area,time=5):        #이미지,설치좌표(튜플로 전달),넓이와 높이를 튜플로 전달,FPS
+    def __init__(self, img, location, area,time=7):        #이미지,설치좌표(튜플로 전달),넓이와 높이를 튜플로 전달,FPS
         Wall.Wall.__init__(self, img, location, area)      #상속 받은 wall초기화
 
         self.frame_counter=0                               #1이상일 경우 사라져 있음

@@ -1,9 +1,11 @@
 # Bouncy Dungeon Tech-alpha 0.1
-import pygame, sys, os, configparser, testmap, random
-from game.data import SaveScore
-
+import pygame, sys, os, configparser, map, random
+from game.data import SaveScore, Rankinit
+from game.data.obj.Setting import setting as s
 # Setting before Main
 mainClock = pygame.time.Clock()
+
+FPS_dic={"Low":30,"Mid":60,"High":60}
 
 # Load Config.cfg
 config = configparser.RawConfigParser()
@@ -14,6 +16,7 @@ SoundToggle = config.get("Setting", "Sound")
 ScoreToggle = config.get("Setting", "Display_Score")
 Frame = config.get("Setting", "Frame")
 StoryToggle = config.get("Game", "Story_Toggle")
+s.set_FPS(FPS_dic[config.get("Setting", "Frame")])
 
 # Pygame Initialize
 pygame.init()
@@ -66,27 +69,7 @@ map_List = []
 
 
 def initialze_map():
-    map_L = []
-    for i in range(1, 9):
-        txt = "easy_map"
-        txt += str(i)
-        txt += ".txt"
-        map_L.append(txt)
-    for i in range(1, 8):
-        txt = "normal_map"
-        txt += str(i)
-        txt += ".txt"
-        map_L.append(txt)
-    for i in range(1, 5):
-        txt = "hard_map"
-        txt += str(i)
-        txt += ".txt"
-        map_L.append(txt)
-    for i in range(1, 4):
-        txt = "hell_map"
-        txt += str(i)
-        txt += ".txt"
-        map_L.append(txt)
+    map_L = ["easy_map1.txt", "easy_map2.txt", "easy_map3.txt", "easy_map4.txt", "hard_map1.txt", "hell_map1.txt", "normal_map1.txt", "normal_map2.txt","normal_map3.txt","normal_map4.txt"]
     return map_L
 
 def suffle_map(map_t, map_L):
@@ -103,9 +86,9 @@ def Start_Menu():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if s_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
-                    #pygame.mixer.music.pause()
+                    pygame.mixer.music.pause()
                     Game_Menu()
-                    #pygame.mixer.music.unpause()
+                    pygame.mixer.music.unpause()
                 if setting_button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Setting_Menu()
@@ -134,7 +117,7 @@ def Game_Menu():
     map_txt = suffle_map(map_txt, map_List)
     newscore = 0
     while Life != 0:
-        running = testmap.Map(screen, Life, map_txt)
+        running = map.Map(screen, Life, map_txt)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -216,10 +199,12 @@ def Setting_Menu():
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "Low"
                     config.set("Setting", "Frame", "Low")
+                    s.set_FPS(30)
                 if Frame_MID_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "Mid"
                     config.set("Setting", "Frame", "Mid")
+                    s.set_FPS(60)
                 if Frame_HIGH_Button.isOver(pos):
                     pygame.mixer.Sound.play(Click_Sound)
                     Frame = "High"
@@ -239,22 +224,25 @@ def Setting_Menu():
 def Score_Menu():
     running = True
     screen.blit(Score_Board, (0, 0))
-    textheight = height // 2 - 160
-    textwidth = width // 2 - 250
     while running:
         f = open('game/data/rank.txt', 'r')
+        textheight = height // 2 - 160
+        textwidth = width // 2 - 450
         while True:
             line = f.readline()
             if not line:
                 break
             name, score = line.split(' ')
-            text = name + "                                       " + score
             textfont = pygame.font.Font('game/data/NanumGothic.ttf', 40)
-            text = textfont.render(text, True, (0, 0, 0))
-            textpos = text.get_rect()
+            name = textfont.render(name, True, (0, 0, 0))
+            score = textfont.render(score, True, (0, 0, 0))
+            namepos = name.get_rect()
+            scorepos = score.get_rect()
             textheight += 45
-            textpos.center = (textwidth, textheight)
-            screen.blit(text, textpos)
+            namepos.center = (textwidth, textheight)
+            scorepos.center = (textwidth + 450, textheight)
+            screen.blit(name, namepos)
+            screen.blit(score, scorepos)
         f.close()
         pygame.display.flip()
 
@@ -262,6 +250,10 @@ def Score_Menu():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     running = 0
+                if event.key == pygame.K_F5:
+                    Rankinit.rank_init()
+                    show_screen()
+                    screen.blit(Score_Board, (0, 0))
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
@@ -326,13 +318,13 @@ def Show_Story():
 
 
 
-#pygame.mixer.music.load('game/audio/Main_bgm.mp3')
-#pygame.mixer.music.play(-1)
+pygame.mixer.music.load('game/audio/Main_bgm.mp3')
+pygame.mixer.music.play(-1)
 if StoryToggle == "False":
     Show_Story()
-    #StoryToggle = "True"
-    #config.set("Game", "Story_Toggle", "True")
-    #ConfigFile = open('game/data/Setting.cfg', 'w')
-    #config.write(ConfigFile)
-    #ConfigFile.close()
+    StoryToggle = "True"
+    config.set("Game", "Story_Toggle", "True")
+    ConfigFile = open('game/data/Setting.cfg', 'w')
+    config.write(ConfigFile)
+    ConfigFile.close()
 Start_Menu()

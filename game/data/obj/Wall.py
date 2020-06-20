@@ -1,7 +1,6 @@
 #2019038026_이혁수 06-14
 import pygame
-from game.data.obj import Ball
-
+from game.data.obj.Setting import setting as s
 
 class Wall(pygame.sprite.Sprite):#스프라이트 상속
     def __init__(self,img,location,area):               #이미지,설치좌표(튜플로 전달),넓이와 높이를 튜플로 전달
@@ -18,9 +17,9 @@ class Wall(pygame.sprite.Sprite):#스프라이트 상속
         #y좌표는 낮을수록 위이기에 ball이 더 작을 경우가 wall이 아래 있음
         if self.rect.top >= ball.get_center(1) - ball.get_speed(1):
             #속도가 10이 넘을시 사망
-            if ball.get_speed(1)>10:
+            if ball.get_speed(1)>s.MAX_SPEED*3.3:
                 return 1
-            ball.speed_set_y(-Ball.MAX_SPEED)
+            ball.speed_set_y(-s.MAX_SPEED)
         #wall의 좌표가 작을때 즉 더 위에 있을 경우
         elif self.rect.bottom<=ball.get_center(1)-ball.get_speed(1):
             if ball.get_speed(1)< 1:
@@ -32,7 +31,7 @@ class Wall(pygame.sprite.Sprite):#스프라이트 상속
             ball.reverse_speed_x()
             # 떨어질때 닿은 것이 아니라 올라갈때 닿으면 더 올라갈 수 있도록 y축 설정 (벽타기)
             if ball.get_speed_y() <= 0:
-                ball.speed_set_y(-Ball.MAX_SPEED // 2)
+                ball.speed_set_y(-s.MAX_SPEED // 2)
 
         return 0
 

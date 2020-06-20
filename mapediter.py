@@ -56,8 +56,8 @@ CreateCannon = 16
 # 아래는 수정할 수 있는 변수들 입니다.
 # !!!!!!!!!!!!!맵의 경우 "확장자"를 꼭 포함하여 적어주세요!!!!!!!!!!!!!!!!!!!
 pixel_size = 40
-OpenFile = "test_map.txt"
-SaveFile = "test_map.txt"
+OpenFile = "testmap.txt"
+SaveFile = "testmap.txt"
 ################################################################
 
 display = []
@@ -228,47 +228,99 @@ while True:
 
         for i in range(width//pixel_size):
             for j in range(height//pixel_size):
-                # for k in range(len(blocks)):
-                #     if display[i][j].find({0}.format(blocks[k])) != -1:
-                #         screen.blit({0}.format(default_blocks[k]), (i * pixel_size, j * pixel_size))
+                temp = display[i][j].split(' ')
                 if display[i][j].find('backblock') != -1:
-                    screen.blit(default_backblock, (i*pixel_size, j*pixel_size))
+                    default_backblock = pygame.transform.rotate(default_backblock, 90*int(temp[4]))
+                    screen.blit(default_backblock, (i * pixel_size, j * pixel_size))
+                    default_backblock = pygame.transform.rotate(default_backblock, -90*int(temp[4]))
+
                 elif display[i][j].find('ball') != -1:
                     screen.blit(default_ball, (i*pixel_size+int((0.1)*pixel_size), j*pixel_size+int((0.1)*pixel_size)))
+
                 elif display[i][j].find('blckhole') != -1:
-                    screen.blit(default_blckhole, (i*pixel_size, j*pixel_size))
+                    default_blckhole = pygame.transform.rotate(default_blckhole, 90 * int(temp[4]))
+                    screen.blit(default_blckhole, (i * pixel_size, j * pixel_size))
+                    default_blckhole = pygame.transform.rotate(default_blckhole, -90 * int(temp[4]))
+
                 elif display[i][j].find('fakewal') != -1:
-                    screen.blit(default_fakewal, (i*pixel_size, j*pixel_size))
+                    default_fakewal = pygame.transform.rotate(default_fakewal, 90 * int(temp[4]))
+                    screen.blit(default_fakewal, (i * pixel_size, j * pixel_size))
+                    default_fakewal = pygame.transform.rotate(default_fakewal, -90 * int(temp[4]))
+
                 elif display[i][j].find('magnetic') != -1:
-                    screen.blit(default_magnetic, (i*pixel_size, j*pixel_size))
+                    default_magnetic = pygame.transform.rotate(default_magnetic, 90 * int(temp[4]))
+                    screen.blit(default_magnetic, (i * pixel_size, j * pixel_size))
+                    default_magnetic = pygame.transform.rotate(default_magnetic, -90 * int(temp[4]))
+
                 elif display[i][j].find('movewal') != -1:
-                    screen.blit(default_movewal, (i*pixel_size, j*pixel_size))
+                    default_movewal = pygame.transform.rotate(default_movewal, 90 * int(temp[4]))
+                    screen.blit(default_movewal, (i * pixel_size, j * pixel_size))
+                    default_movewal = pygame.transform.rotate(default_movewal, -90 * int(temp[4]))
+
                 elif display[i][j].find('endpoint') != -1:
+                    default_endpoint = pygame.transform.rotate(default_endpoint, 90 * int(temp[4]))
                     screen.blit(default_endpoint, (i * pixel_size, j * pixel_size))
+                    default_endpoint = pygame.transform.rotate(default_endpoint, -90 * int(temp[4]))
+
                 elif display[i][j].find('star') != -1:
-                    screen.blit(default_star, (i*pixel_size, j*pixel_size))
+                    default_star = pygame.transform.rotate(default_star, 90 * int(temp[4]))
+                    screen.blit(default_star, (i * pixel_size, j * pixel_size))
+                    default_star = pygame.transform.rotate(default_star, -90 * int(temp[4]))
+
                 elif display[i][j].find('thorn') != -1:
+                    default_thorn = pygame.transform.rotate(default_thorn, 90 * int(temp[4]))
                     screen.blit(default_thorn, (i * pixel_size, j * pixel_size))
+                    default_thorn = pygame.transform.rotate(default_thorn, -90 * int(temp[4]))
+
                 elif display[i][j].find('wall') != -1:
+                    default_wall = pygame.transform.rotate(default_wall, 90 * int(temp[4]))
                     screen.blit(default_wall, (i * pixel_size, j * pixel_size))
+                    default_wall = pygame.transform.rotate(default_wall, -90 * int(temp[4]))
+
                 elif display[i][j].find('spring') != -1:
+                    default_spring = pygame.transform.rotate(default_spring, 90 * int(temp[4]))
                     screen.blit(default_spring, (i * pixel_size, j * pixel_size))
+                    default_spring = pygame.transform.rotate(default_spring, -90 * int(temp[4]))
+
                 elif display[i][j].find('icicle') != -1:
+                    default_icicle = pygame.transform.rotate(default_icicle, 90 * int(temp[4]))
                     screen.blit(default_icicle, (i * pixel_size, j * pixel_size))
+                    default_icicle = pygame.transform.rotate(default_icicle, -90 * int(temp[4]))
+
                 elif display[i][j].find('laser') != -1:
+                    default_laser = pygame.transform.rotate(default_laser, 90 * int(temp[4]))
                     screen.blit(default_laser, (i * pixel_size, j * pixel_size))
+                    default_laser = pygame.transform.rotate(default_laser, -90 * int(temp[4]))
+
                 elif display[i][j].find('subpotal') != -1:
+                    default_subportal = pygame.transform.rotate(default_subportal, 90 * int(temp[4]))
                     screen.blit(default_subportal, (i * pixel_size, j * pixel_size))
+                    default_subportal = pygame.transform.rotate(default_subportal, -90 * int(temp[4]))
+
                 elif display[i][j].find('blinkblock') != -1:
+                    default_blinkblock = pygame.transform.rotate(default_blinkblock, 90 * int(temp[4]))
                     screen.blit(default_blinkblock, (i * pixel_size, j * pixel_size))
+                    default_blinkblock = pygame.transform.rotate(default_blinkblock, -90 * int(temp[4]))
+
                 elif display[i][j].find('lever') != -1:
+                    default_lever = pygame.transform.rotate(default_lever, 90 * int(temp[4]))
                     screen.blit(default_lever, (i * pixel_size, j * pixel_size))
+                    default_lever = pygame.transform.rotate(default_lever, -90 * int(temp[4]))
+
                 elif display[i][j].find('levon') != -1:
+                    default_leverOnOff = pygame.transform.rotate(default_leverOnOff, 90 * int(temp[4]))
                     screen.blit(default_leverOnOff, (i * pixel_size, j * pixel_size))
+                    default_leverOnOff = pygame.transform.rotate(default_leverOnOff, -90 * int(temp[4]))
+
                 elif display[i][j].find('portal') != -1:
+                    default_portal = pygame.transform.rotate(default_portal, 90 * int(temp[4]))
                     screen.blit(default_portal, (i * pixel_size, j * pixel_size))
+                    default_portal = pygame.transform.rotate(default_portal, -90 * int(temp[4]))
+
                 elif display[i][j].find('cannon') != -1:
+                    default_cannon = pygame.transform.rotate(default_cannon, 90 * int(temp[4]))
                     screen.blit(default_cannon, (i * pixel_size, j * pixel_size))
+                    default_cannon = pygame.transform.rotate(default_cannon, -90 * int(temp[4]))
                 else:
                     pass
 
@@ -416,7 +468,6 @@ while True:
             portal.x, portal.y = toolbox.x + pixel_size * 1, toolbox.y + pixel_size * 2
             cannon.x, cannon.y = toolbox.x + pixel_size * 2, toolbox.y + pixel_size * 2
             MoveToolbox = False
-
 
         if CheckCode == 0 and event.type == pygame.MOUSEBUTTONUP and event.button == 1:
             x, y = pos[0]//pixel_size, pos[1]//pixel_size
@@ -574,24 +625,30 @@ while True:
             else:
                 display[x][y] = "0\n"
 
+
+
         #방향잡는건 나중에 함
-        # elif event.type == pygame.MOUSEBUTTONUP and event.button == 4:
-        #     x, y = pos[0] // pixel_size, pos[1] // pixel_size
-        #     temp = display[x][y].split(' ')
-        #     side = (int(temp[4])+1) % 4
-        #     display[x][y] = temp[0] + " " + temp[1] + " " + temp[2] + " " + temp[3]\
-        #                     + " " + str(side) + " " + temp[5] + " " + temp[6] + "\n"
-        #
-        # elif event.type == pygame.MOUSEBUTTONUP and event.button == 5:
-        #     x, y = pos[0] // pixel_size, pos[1] // pixel_size
-        #     temp = display[x][y].split(' ')
-        #     side = (int(temp[4])-1) % 4
-        #     display[x][y] = temp[0] + " " + temp[1] + " " + temp[2] + " " + temp[3]\
-        #                     + " " + str(side) + " " + temp[5] + " " + temp[6] + "\n"
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == 4:  #마우스 휠 위로
+            x, y = pos[0] // pixel_size, pos[1] // pixel_size
+            if display[x][y] == "0\n":
+                break
+            temp = display[x][y].split(' ')
+            side = (int(temp[4])+1) % 4
+            display[x][y] = temp[0] + " " + temp[1] + " " + temp[2] + " " + temp[3]\
+                            + " " + str(side) + " " + temp[5] + " " + temp[6]
+
+        elif event.type == pygame.MOUSEBUTTONUP and event.button == 5:  #마우스 휠 아래로
+            x, y = pos[0] // pixel_size, pos[1] // pixel_size
+            if display[x][y] == "0\n":
+                break
+            temp = display[x][y].split(' ')
+            side = (int(temp[4])-1) % 4
+            display[x][y] = temp[0] + " " + temp[1] + " " + temp[2] + " " + temp[3]\
+                            + " " + str(side) + " " + temp[5] + " " + temp[6]
 
         else:
             continue
 
     pygame.display.update()
 
-#최종수정시간:2020.06.06.19.47
+#최종수정시간:2020.06.19.

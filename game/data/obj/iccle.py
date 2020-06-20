@@ -2,20 +2,20 @@ import pygame
 from game.data.obj.Setting import setting as s
 
 class Iccle(pygame.sprite.Sprite):
-    def __init__(self,img,location,area,time=2,speed=1):
-        '''블럭 이미지, 위치(튜플),면적(튜플), 고드름이 사라져있는 시간,충돌 가능성이 있는 객체들 공제외 (리스트)'''
+    def __init__(self,img,location,area,time=1.2,speed=1):
+        '''블럭 이미지, 위치(튜플),면적(튜플), 고드름이 사라져있는 시간,속도'''
         pygame.sprite.Sprite.__init__(self)             #스프라이트 초기화
         self.image= pygame.transform.scale(img,area)    #이미지의 크기를 내가 원하는 크기로 조정
         self.rect= self.image.get_rect()                #이미지의 사각형에 해당하는 범위를 가져옴
         self.rect.topleft= location                     #위치설정
         self.mask=pygame.mask.from_surface(self.image)  #충돌감지를 위한 마스크생성
 
-        self.gravity=speed*s.Fall_speed/s.FPS#*s.time_adjustment
+        self.gravity=speed*s.Fall_speed/s.FPS
 
-        self.speed=1
+        self.speed=speed
         self.frame_counter = 0  # 1이상일 경우 사라져 있음
         self.disappear_time = time  # 사라져있을시간
-        self.star_loc=location      #시작위치
+        self.start_loc=location      #시작위치
 
     def disappear(self):
         self.frame_counter=s.FPS*self.disappear_time
@@ -26,7 +26,7 @@ class Iccle(pygame.sprite.Sprite):
         if self.frame_counter>0:
             self.frame_counter-=1
             return 0
-        self.rect.topleft=self.star_loc
+        self.rect.topleft=self.start_loc
         self.speed=1
         return 1
 
