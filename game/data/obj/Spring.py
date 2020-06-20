@@ -23,7 +23,7 @@ class Spring(pygame.sprite.Sprite):
         elif(self.rect.top>ball.get_center(1)-ball.get_speed_y()):
             if ball.get_speed(1)>s.MAX_SPEED*3.3:
                 return 1
-            ball.speed_set_y(-s.MAX_SPEED * 1.5)
+            ball.speed_set_y(-s.MAX_SPEED * 1.4)
 
         elif self.rect.bottom<=ball.get_center(1)-ball.get_speed(1):
             if ball.get_speed(1)< 1:
