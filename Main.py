@@ -66,7 +66,27 @@ map_List = []
 
 
 def initialze_map():
-    map_L = ["easy_map1.txt", "easy_map2.txt", "easy_map3.txt", "easy_map4.txt", "hard_map1.txt", "hell_map1.txt", "normal_map1.txt", "normal_map2.txt","normal_map3.txt","normal_map4.txt"]
+    map_L = []
+    for i in range(1, 9):
+        txt = "easy_map"
+        txt += str(i)
+        txt += ".txt"
+        map_L.append(txt)
+    for i in range(1, 8):
+        txt = "normal_map"
+        txt += str(i)
+        txt += ".txt"
+        map_L.append(txt)
+    for i in range(1, 5):
+        txt = "hard_map"
+        txt += str(i)
+        txt += ".txt"
+        map_L.append(txt)
+    for i in range(1, 4):
+        txt = "hell_map"
+        txt += str(i)
+        txt += ".txt"
+        map_L.append(txt)
     return map_L
 
 def suffle_map(map_t, map_L):
@@ -223,8 +243,6 @@ def Score_Menu():
     textwidth = width // 2 - 250
     while running:
         f = open('game/data/rank.txt', 'r')
-        textheight = height // 2 - 160
-        textwidth = width // 2 - 250
         while True:
             line = f.readline()
             if not line:
