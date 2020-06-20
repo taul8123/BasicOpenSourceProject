@@ -9,15 +9,20 @@ class block(Wall.Wall):
 
         self.state=False             #True시 활성 False시 비활성
 
+
     def change_state(self):
         '''상태 변경(ex:활성->비활성) 후 그에 맞는 이미지 입력'''
         self.state= not self.state
-        self.image=self.image_list[self.state]
+        if self.state:
+            self.image=self.image_list[0]
+        else:
+            self.image = self.image_list[1]
 
     def collision_check(self,ball):
         '''활성화 상태시만 충돌체크'''
         if(self.state):
             return self.collision(ball)
+
         return 0
 
 
